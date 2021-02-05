@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css';
+import './components/Theme.css';
 
 import Home from './components/Home'
 import SignUp from './components/SignUp'
