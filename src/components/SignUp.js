@@ -1,6 +1,5 @@
 import React from 'react'
-import logo from '../images/logo.png'
-import { connect } from 'react-redux'
+import logo from '../images/sprig logo.png'
 // import { loginSuccess } from '../actions/auth'
 
 

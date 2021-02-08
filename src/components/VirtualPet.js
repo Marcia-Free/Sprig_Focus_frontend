@@ -1,50 +1,32 @@
-import React from 'react'
-import * as THREE from 'three';
+// import React from 'react'
+import React, { useRef, useState } from 'react'
+import ReactDOM from 'react-dom'
+
+let container;
 
 
-let camera, scene, renderer;
-let geometry, material, mesh;
 
 class VirtualPet extends React.Component {
     
-
-
 render() {
+
     return (
-        
-        <div className='VirtualPet'>
-            {this.init()}
+        <div className='VirtualPet' >
+            {/* {this.setCanvas()} */}
         </div>
     );
   }
 
-    init() {
-        // camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-        camera = new THREE.PerspectiveCamera( 70, window.innerWidth / 250, 0.01, 10 );
+    setCanvas() {
+        let canvas = document.getElementsByClassName('VirtualPet')
+        let test = document.querySelector('#test')
 
-        camera.position.z = 1;
+        canvas.append( container );
 
-        scene = new THREE.Scene();
-
-        geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-        material = new THREE.MeshNormalMaterial();
-
-        mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
-
-        renderer = new THREE.WebGLRenderer( { antialias: true } );
-        // renderer.setSize( window.innerWidth, window.innerHeight );
-        renderer.setSize( window.innerWidth, 250 );
-        renderer.setAnimationLoop( this.animation );
-        document.body.appendChild( renderer.domElement );
     }
 
-    animation( time ) {
-        mesh.rotation.x = time / 5000;
-        mesh.rotation.y = time / 2500;
-        renderer.render( scene, camera );
-    }
 
+   
 
 }
 export default VirtualPet;

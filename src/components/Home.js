@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../images/logo.png'
+import logo from '../images/sprig logo.png'
 
 class Home extends React.Component {
 

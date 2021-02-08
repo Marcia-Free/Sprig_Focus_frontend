@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../images/logo.png'
+import logo from '../images/sprig logo.png'
 import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
@@ -19,8 +19,8 @@ render() {
 
 
                 <a className="item">Welcome, User</a>
-                <a className="item"><Link to='/goals'>Task View</Link></a>
-                <a className="item"><Link to='/goals/calendar'>Month View</Link></a>
+                <a className="item"><Link to='/focus'>Focus View</Link></a>
+                <a className="item"><Link to='/goals/calendar'>Completed Tasks</Link></a>
 
 
                 <div class="right menu">
