@@ -6,9 +6,11 @@
     text-align: center; 
   }
 
-  /* .SprigWindow {
-
-  } */
+  #my-canvas {
+    width:100%;
+    height:100%;
+    touch-action:none;
+  }
 
   .ui.top.attached.menu {
     background-color: rgb(252, 246, 238);

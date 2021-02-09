@@ -18,9 +18,7 @@ render() {
         <div className='Goals'>
         <NavBar />
 
-            <div>
                 <h1>Goal Page</h1>
-            </div>
 
             <div className="ui two column centered grid">
                 <div className="sixteen wide black column"> Placeholder!</div>
