@@ -67,31 +67,22 @@ render() {
         <div className='Goals'>
         <NavBar />
 
-                <h1>What will you accomplish today?</h1>
-
-            <div className="ButtonColumn sixteen wide column">
-                <button className="ui orange labeled icon button">
-                    <i className="columns icon"></i>
-                    Update Goal
-                </button>
-                <button className="ui orange right labeled icon button">
-                    <i className="sticky note icon"></i>
-                    Delete Goal
-                </button>
-            </div>
+                <h1 className="ui yellow image header">What will you accomplish today?</h1>
 
 
             <div className="ui two column centered grid">
-                <div className="ten wide olive column">
+                <div className="twelve wide column">
+
                     <form className="ui form" onSubmit={this.onSubmit} >
+                        
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" name="name" onChange={this.onChange}/>
+                            <input type="text" name="name" placeholder="Goal Name" onChange={this.onChange}/>
                         </div>
 
                         <div className="field">
                             <label>Info</label>
-                            <textarea rows="3" name="info" onChange={this.onChange}/>
+                            <textarea rows="3" name="info" placeholder="Description" onChange={this.onChange}/>
                         </div>
 
                         <div className="fields">
@@ -106,15 +97,14 @@ render() {
                             </div>
                         </div>
 
-                        <button className="ui button" type="submit">Add Goal</button>
+                        <button className="ui fluid large yellow submit button" type="submit">Add Goal</button>
+                        <div class="ui error message"></div>
+                        
                     </form>
                 </div>
             </div>
 
             
-
-
-        <Footer />
         </div>
     );
   }

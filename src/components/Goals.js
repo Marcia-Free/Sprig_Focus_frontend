@@ -89,11 +89,11 @@ render() {
         <VirtualPet />
             <div className="ButtonColumn sixteen wide column">
                 <Link to='/new'>
-                    <button className="ui orange labeled icon button">
+                    <button className="ui yellow labeled icon button">
                     <i className="columns icon"></i>
                     Create Goal
                 </button></Link>
-                <button className="ui orange right labeled icon button">
+                <button className="ui yellow right labeled icon button">
                     <i className="sticky note icon"></i>
                     Create Task
                 </button>

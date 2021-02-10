@@ -5,93 +5,95 @@ import logo from '../images/sprig logo.png'
 
 
 class SignUp extends React.Component {
-    // state = {
-    //     username: '',
-    //     password: '',
-    //     error: ''
-    //   }
+// state = {
+//     username: '',
+//     password: '',
+//     error: ''
+//   }
 
-    //   handleInputChange = (e) => { 
-    //     this.setState({
-    //       [e.target.name]: e.target.value
-    //     })
-    //   }
+//   handleInputChange = (e) => { 
+//     this.setState({
+//       [e.target.name]: e.target.value
+//     })
+//   }
 
-    //   handleSubmit = (e) => {
-    //     e.preventDefault()
-    
-    //     const reqObj = {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body:  JSON.stringify(this.state)
-    //     }
-    //     fetch('http://localhost:3000/api/v1/auth', reqObj)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //       if (data.error){
-    //         this.setState({
-    //           error: data.error
-    //         })
-    //       } else {
-    //         localStorage.setItem('jwt_token', data.token)
-    
-    
-    //         this.props.loginSuccess(data.user)
-    //         this.props.history.push('/dashboard')
-    //       }
-    //     })
-    //   }
+//   handleSubmit = (e) => {
+//     e.preventDefault()
 
+//     const reqObj = {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body:  JSON.stringify(this.state)
+//     }
+//     fetch('http://localhost:3000/api/v1/auth', reqObj)
+//     .then(resp => resp.json())
+//     .then(data => {
+//       if (data.error){
+//         this.setState({
+//           error: data.error
+//         })
+//       } else {
+//         localStorage.setItem('jwt_token', data.token)
+
+
+//         this.props.loginSuccess(data.user)
+//         this.props.history.push('/dashboard')
+//       }
+//     })
+//   }
 
 
 render() {
-    return (
-        <div className='Form'>
-            <div>
-                <h1>Sign Up</h1>
-            </div>
-            
+  return (
 
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui yellow image header">
-      <img src={logo} class="image"/>
-      <div class="content">
+  <div className='SignUp' >
+
+    <h1>Sign Up</h1>
+    <h2 className="ui yellow image header">
+      <img src={logo} className="image"/>
+        <div className="content">
         Log-in to your account
-      </div>
+        </div>
     </h2>
-    <form class="ui large form">
-      <div class="ui stacked segment">
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address"/>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password"/>
-          </div>
-        </div>
-        <Link to='/focus'><div class="ui fluid large yellow submit button">Login</div></Link>
-      </div>
 
-      <div class="ui error message"></div>
-    </form>
+      <div className="ui two column centered grid">
+        <div className="twelve wide column">
+          <form className="ui form">
 
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="username" placeholder="Username"/>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="envelope icon"></i>
+                <input type="text" name="email" placeholder="E-mail address"/>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Password"/>
+              </div>
+            </div>
+
+            <Link to='/goals'><div class="ui fluid large yellow submit button">Login</div></Link>
+            <div class="ui error message"></div>
+          </form>
+
+        </div>
+      </div> 
   </div>
-</div>
 
-
-
-
-        </div>
-    );
+  );
   }
 
 
-}
+  }
 export default SignUp;
