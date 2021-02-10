@@ -1,47 +1,48 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../images/sprig logo.png'
 // import { loginSuccess } from '../actions/auth'
 
 
 class SignUp extends React.Component {
-    state = {
-        username: '',
-        password: '',
-        error: ''
-      }
+    // state = {
+    //     username: '',
+    //     password: '',
+    //     error: ''
+    //   }
 
-      handleInputChange = (e) => { 
-        this.setState({
-          [e.target.name]: e.target.value
-        })
-      }
+    //   handleInputChange = (e) => { 
+    //     this.setState({
+    //       [e.target.name]: e.target.value
+    //     })
+    //   }
 
-      handleSubmit = (e) => {
-        e.preventDefault()
+    //   handleSubmit = (e) => {
+    //     e.preventDefault()
     
-        const reqObj = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body:  JSON.stringify(this.state)
-        }
-        fetch('http://localhost:3000/api/v1/auth', reqObj)
-        .then(resp => resp.json())
-        .then(data => {
-          if (data.error){
-            this.setState({
-              error: data.error
-            })
-          } else {
-            localStorage.setItem('jwt_token', data.token)
+    //     const reqObj = {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body:  JSON.stringify(this.state)
+    //     }
+    //     fetch('http://localhost:3000/api/v1/auth', reqObj)
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //       if (data.error){
+    //         this.setState({
+    //           error: data.error
+    //         })
+    //       } else {
+    //         localStorage.setItem('jwt_token', data.token)
     
     
-            this.props.loginSuccess(data.user)
-            this.props.history.push('/dashboard')
-          }
-        })
-      }
+    //         this.props.loginSuccess(data.user)
+    //         this.props.history.push('/dashboard')
+    //       }
+    //     })
+    //   }
 
 
 
@@ -75,7 +76,7 @@ render() {
             <input type="password" name="password" placeholder="Password"/>
           </div>
         </div>
-        <div class="ui fluid large yellow submit button">Login</div>
+        <Link to='/focus'><div class="ui fluid large yellow submit button">Login</div></Link>
       </div>
 
       <div class="ui error message"></div>

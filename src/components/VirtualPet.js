@@ -41,15 +41,8 @@ render() {
         // Default intensity is 1. Let's dim the light a small amount
         light.intensity = 0.7;
 
-        <sphere name="sphere1"
-      diameter={2} segments={16} position={new Vector3(0, 1, 0)} />
-
-        // Our built-in 'box' shape.
-        // box = MeshBuilder.CreateBox("box", {size: 2}, scene);
-        // Move the box upward 1/2 its height
-        // box.position.y = 1;
         // Our built-in 'ground' shape.
-        MeshBuilder.CreateGround("ground", {width: 6, height: 6}, scene);
+        MeshBuilder.CreateGround("ground", {width: 25, height: 6}, scene);
 
 
 

@@ -1,12 +1,18 @@
 import React from 'react'
+import {Route, Switch} from 'react-router-dom'
+
 import './components/Theme.css';
 
 import Home from './components/Home'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
-import Focus from './components/Focus'
+import Goals from './components/Goals'
+import Goal from './components/Goal'
+import Complete from './components/Complete'
 
-import {Route, Switch} from 'react-router-dom'
+import Form from './components/Form'
+
+
 
 function App() {
   return (
@@ -15,8 +21,11 @@ function App() {
           <Route exact path ={'/'} component={Home} />
           <Route exact path={'/signup'} component={SignUp} />
           <Route exact path = {'/signin'} component={SignIn} />
-          <Route exact path = {'/focus'} component={Focus} />
-          {/* <Route exact path = {'/completed'} component={Complete} /> */}
+          <Route exact path = {'/goals'} component={Goals} />
+          <Route exact path = {'/goals/:id'} component={Goal} />
+          <Route exact path = {'/completed'} component={Complete} />
+
+          <Route exact path = {'/new'} component={Form} />
         </Switch>
     </div>
   );

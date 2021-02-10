@@ -4,9 +4,6 @@ import logo from '../images/sprig logo.png'
 
 class Home extends React.Component {
 
-
-
-
 render() {
     return (
         <div className='Home'>

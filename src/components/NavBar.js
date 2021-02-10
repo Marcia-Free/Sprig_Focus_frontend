@@ -19,8 +19,8 @@ render() {
 
 
                 <a className="item">Welcome, User</a>
-                <a className="item"><Link to='/focus'>Focus View</Link></a>
-                <a className="item"><Link to='/goals/calendar'>Completed Tasks</Link></a>
+                <a className="item"><Link to='/goals'>Goals</Link></a>
+                <a className="item"><Link to='/completed'>Completed</Link></a>
 
 
                 <div class="right menu">
