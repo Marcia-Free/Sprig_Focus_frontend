@@ -8,10 +8,10 @@ import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 import Goals from './components/Goals'
 import Goal from './components/Goal'
-import Task from './components/Task'
 import Complete from './components/Complete'
 
 import newForm from './components/newForm'
+import newTaskForm from './components/newTaskForm'
 import updateForm from './components/updateForm'
 
 
@@ -30,9 +30,9 @@ function App() {
           <Route exact path = {'/new'} component={newForm} />
           <Route exact path = {'/goals/:id/edit'} component={updateForm} />
 
-          <Route exact path = {'/tasks/:id'} component={Task} />
-          {/* <Route exact path = {'/new'} component={newForm} />
-          <Route exact path = {'/tasks/:id/edit'} component={updateForm} /> */}
+          {/* <Route exact path = {'/tasks/:id'} component={Task} /> */}
+          <Route exact path = {'/tasks/new'} component={newTaskForm} />
+          {/* <Route exact path = {'/tasks/:id/edit'} component={updateForm} /> */}
         </Switch>
     </div>
   );

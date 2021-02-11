@@ -3,7 +3,6 @@ import { Link , Redirect} from "react-router-dom";
 import NavBar from './NavBar'
 import Footer from './Footer'
 import VirtualPet from './VirtualPet'
-import Task from './Task'
 
 import logo from '../images/sprig logo.png'
 import { SetStateAction } from '@babylonjs/core';
@@ -88,6 +87,28 @@ class Goal extends React.Component {
 
     }
 
+    testDelete(event) {
+      console.log(this.state)
+      const { match: {params: { id }}} = this.props;
+
+      // const url = `http://localhost:3001/api/v1/tasks/${id}`;
+
+      //   fetch(url, {
+      //       method: "DELETE",
+      //       headers: {
+      //         "Content-Type": "application/json"
+      //       }
+      //     })
+      //       .then(response => {
+      //         if (response.ok) {
+      //           return response.json();
+      //         }
+      //         throw new Error("Network response was not ok.");
+      //       })
+      //       .then(() => this.props.history.push("/goals"))
+      //       .catch(error => console.log(error.message));
+    }
+
 
   render() {
 
@@ -115,7 +136,7 @@ class Goal extends React.Component {
               </div>
 
               <div class="ui small right floated icon buttons">
-                <button class="ui button"><i class="red eraser icon"></i></button>
+                <button class="ui button" onClick={this.testDelete}><i class="red eraser icon"></i></button>
                 <button class="ui button"><i class="black edit icon"></i></button>
               </div>
     
@@ -134,7 +155,7 @@ class Goal extends React.Component {
 
               <div className="ui two column centered grid">
 
-                  <div className="LeftSide six wide column">
+                  <div className="Main six wide column">
                     <div className="two ui buttons">
                         <Link to={`/goals/${goal.id}/edit`}><button className="ui yellow left attached button" >
                             Update Goal
@@ -146,36 +167,37 @@ class Goal extends React.Component {
                     </div>
                   </div>
 
-                  <div className="eight wide olive column">
+                  <div className="Main eight wide column">
                       <div className="ui segments">
                               <a className="ui small image"> <img src={logo}/> </a>
 
-                              <div className="ui segment">
+                              <div className="ui olive segment">
                                   <h2 class="ui header">
                                       {goal.completed === true ? goalDone : goalNotDone}
                                       <div class="content"> {goal.name} </div>
                                   </h2>
                               </div>
 
-                              <div className='ui two column grid'>
-                                <span class="ui column">
+                              <div className='ui horizontal segments'>
+                                <span class="ui olive segment">
                                   <i class="calendar outline icon"></i>
                                   {goal.date}
                                 </span>
-                                <span class="ui column">
+
+                                <span class="ui olive segment">
                                   <i class="clock outline icon"></i>
                                   {goal.time}
                                 </span>   
                               </div>
 
-                                  <div className='ui secondary segment'>
+                                  <div className='ui olive secondary segment'>
                                   <div className="ui header">Info</div>
                                   <div className="description"> <p>{goal.info}</p> </div>
                               
                                   <a className="header"> <h3>Tasks</h3></a>
                                   <div className="ui divider"></div>
                                   
-                                    <Link to='/new'><button className="ui yellow basic fluid labeled icon button">
+                                    <Link to='/tasks/new'><button className="ui yellow basic fluid labeled icon button">
                                           <i className="plus icon"></i>
                                           New Task
                                     </button></Link> 

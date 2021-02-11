@@ -19,14 +19,15 @@
   }
 
   #my-canvas {
-    width:75%;
+    width: 90%;
     height:400px;
     touch-action:none;
+    margin-bottom: 3em;;
   }
 
-  .LeftSide.six.wide.column {
-    background-color: rgb(252, 233, 208);
 
+  .Main {
+    background-color: rgb(252, 233, 208);
   }
 
 

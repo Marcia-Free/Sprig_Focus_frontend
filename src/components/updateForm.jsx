@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import NavBar from './NavBar'
 import Footer from './Footer'
-import VirtualPet from './VirtualPet'
 
 import logo from '../images/sprig logo.png'
 
@@ -71,20 +70,44 @@ class updateForm extends React.Component {
 
 
 render() {      
+    const { goal } = this.state;
+    const goalTasks = goal.tasks;
+
+    let taskList = "No tasks created yet";
+
+    const allTasks =  goalTasks.map((task, index) => (
+        <div className='Task item'>
+
+        <i className="right triangle icon"></i>
+
+          <div className="content">
+            <div className="header">{task.name}</div>
+            <div className="description">{task.description}</div>
+          </div>
+
+          <div class="ui small right floated icon buttons">
+            <button class="ui button"><i class="red eraser icon"></i></button>
+            <button class="ui button"><i class="black edit icon"></i></button>
+          </div>
+
+      </div>
+        ))
+
+
+
     return (
+
+        
         
         <div className='Goals'>
         <NavBar />
 
-        <VirtualPet />
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 
-                <div className="ui two column centered grid">
+                <div className="ui centered grid">
 
-                    <div className="six wide grey column">Placeholder</div>
-
-                    <div className="eight wide olive column">
+                    <div className=" Main ten wide column">
                         <div className="ui segments">
                             <a className="ui small image"> <img src={logo}/> </a>
 
@@ -97,33 +120,43 @@ render() {
                                     </h3>
                                 </div>
 
-                                <div className='ui olive segment'>
-                                    <div className="field">
-                                        <i class="calendar outline icon"></i><label>Date </label>
-                                        <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
+                                <div className='ui horizontal segments'>
+                                    <div className='ui olive segment'>
+                                        <div className="field">
+                                            <i class="calendar outline icon"></i><label>Date </label>
+                                            <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
+                                        </div>
                                     </div>
-                                
-                                    <div className="field">
-                                        <i class="clock outline icon"></i><label>Time </label>
-                                        <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
+
+                                    <div className='ui olive segment'>
+                                        <div className="field">
+                                            <i class="clock outline icon"></i><label>Time </label>
+                                            <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className='ui secondary olive segment'>
                                     <div className="ui header">Info</div>
                                         <div className="field">
-                                        <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
+                                            <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
 
-                                    <button className="ui fluid large yellow submit button" type="submit">Update Goal</button>
-                                    <Link to={`/goals/${this.state.goal.id}`}><button className="ui fluid large red submit button">Go Back</button></Link>
+                                    <div class="two ui buttons">
+                                        <button className="ui fluid large yellow submit button" type="submit">Update Goal</button>
+                                        <Link to={`/goals/${this.state.goal.id}`}>
+                                            <button className="ui fluid large red submit button">Go Back
+                                            </button></Link>
+                                    </div>
+
                                     <div class="ui error message"></div>
                                 
                                     <div className="ui divider"></div>
                                     <a className="header"> <h3>Tasks</h3> </a>
-                                    <div className="ui divider"></div>
 
-                                    {/* {taskList} */}
+                                    <div className= 'ui middle aligned divided list'>
+                                    {goal.tasks.length > 0 ? allTasks : taskList}
+                                  </div>
                                 </div> 
                         </div>
                     </div>

@@ -97,15 +97,15 @@ render() {
   
 
             <div className="ui two column centered grid">
-                <div className="LeftSide six wide column">
-                    <div className="ButtonColumn centered column">
+                <div className="Main six wide column">
+                  
                         <Link to='/new'><button className="ui yellow fluid labeled icon button">
                             <i className="columns icon"></i>
                             Create Goal
                         </button></Link>
-                    </div>
+
                 </div>
-                <div className="eight wide olive column">
+                <div className="Main eight wide column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
             </div>
