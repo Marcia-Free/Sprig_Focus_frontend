@@ -92,7 +92,7 @@ render() {
                                     <h3 class="ui header">
                                         <div className="field">
                                             <label>Name</label>
-                                            <input type="text" name="name" placeholder={this.state.goal.name} onChange={this.onChange}/>
+                                            <input type="text" name="name" value={this.state.goal.name} onChange={this.onChange}/>
                                         </div>
                                     </h3>
                                 </div>
@@ -100,19 +100,19 @@ render() {
                                 <div className='ui olive segment'>
                                     <div className="field">
                                         <i class="calendar outline icon"></i><label>Date </label>
-                                        <input type="date" name="date" placeholder={this.state.goal.date} onChange={this.onChange}/>
+                                        <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
                                     </div>
                                 
                                     <div className="field">
                                         <i class="clock outline icon"></i><label>Time </label>
-                                        <input type="time" name="time" placeholder={this.state.goal.time} onChange={this.onChange}/>
+                                        <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
                                     </div>
                                 </div>
 
                                 <div className='ui secondary olive segment'>
                                     <div className="ui header">Info</div>
                                         <div className="field">
-                                        <textarea rows="4" name="info" placeholder={this.state.goal.info} onChange={this.onChange}/>
+                                        <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
 
                                     <button className="ui fluid large yellow submit button" type="submit">Update Goal</button>
@@ -133,8 +133,6 @@ render() {
 
 
 
-
-<Footer />
 </div>
 
 

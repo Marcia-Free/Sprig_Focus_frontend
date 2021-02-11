@@ -34,7 +34,7 @@ class newForm extends React.Component {
     onSubmit(event) {
     event.preventDefault();
     const url = "http://localhost:3001/api/v1/goals";
-    const newGoal = {...this.state, time: this.state.time}
+    const newGoal = {...this.state}
     //-----------------------
     const reqObj = {
       method: 'POST',

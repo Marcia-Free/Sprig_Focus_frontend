@@ -35,9 +35,6 @@ render() {
                 </div>
                 
             </div>
-            <div class="ui bottom attached segment">
-                <p>Placeholder inc</p>
-            </div>
 
 
         </div>

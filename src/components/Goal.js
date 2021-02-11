@@ -126,21 +126,21 @@ class Goal extends React.Component {
 
           <VirtualPet />
 
-              <div className="ButtonColumn sixteen wide column">
-                  <Link to={`/goals/${goal.id}/edit`}><button className="ui orange labeled icon button" >
-                      <i className="columns icon"></i>
-                      Update Goal
-                  </button></Link>
-                  <button className="ui orange right labeled icon button"  onClick={this.handleDelete}>
-                      <i className="sticky note icon"></i>
-                      Delete Goal
-                  </button>
-              </div>
-    
-
               <div className="ui two column centered grid">
 
-                  <div className="six wide grey column">Placeholder</div>
+                  <div className="six wide grey column">
+                    <div className="ButtonColumn centered column">
+                        <Link to={`/goals/${goal.id}/edit`}><button className="ui yellow labeled icon button" >
+                            <i className="columns icon"></i>
+                            Update Goal
+                        </button></Link>
+                        <button className="ui yellow right labeled icon button"  onClick={this.handleDelete}>
+                            <i className="sticky note icon"></i>
+                            Delete Goal
+                        </button>
+                    </div>
+                  </div>
+
                   <div className="eight wide olive column">
                       <div className="ui segments">
                               <a className="ui small image"> <img src={logo}/> </a>
@@ -167,19 +167,19 @@ class Goal extends React.Component {
                                   <div className="ui header">Info</div>
                                   <div className="description"> <p>{goal.info}</p> </div>
                               
-                              
-                                  <a className="header"> <h3>Tasks</h3> </a>
+                                  <a className="header"> <h3>Tasks</h3></a>
                                   <div className="ui divider"></div>
+                                  
+                                    <Link to='/new'><button className="ui yellow basic fluid labeled icon button">
+                                          <i className="plus icon"></i>
+                                          New Task
+                                    </button></Link> 
                                   {taskList}
                               </div> 
                       </div>
                   </div>
               </div>
 
-              
-
-
-          <Footer />
           </div>
       );
     }

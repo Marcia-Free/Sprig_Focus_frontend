@@ -97,7 +97,6 @@ render() {
                 </div>
             </div>
 
-        <Footer />
         </div>
     );
   }

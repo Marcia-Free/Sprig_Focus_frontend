@@ -23,9 +23,9 @@ function App() {
           <Route exact path={'/signup'} component={SignUp} />
           <Route exact path = {'/signin'} component={SignIn} />
           <Route exact path = {'/goals'} component={Goals} />
-          <Route exact path = {'/goals/:id'} component={Goal} />
           <Route exact path = {'/completed'} component={Complete} />
 
+          <Route exact path = {'/goals/:id'} component={Goal} />
           <Route exact path = {'/new'} component={newForm} />
           <Route exact path = {'/goals/:id/edit'} component={updateForm} />
         </Switch>

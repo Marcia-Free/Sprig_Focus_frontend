@@ -38,13 +38,7 @@ render() {
 
         const allGoals = currentGoals.map((goal, index) => (
             <div className='GoalCard grey ui fluid card'>
-            {/* goal={goal.name}
-                info={goal.info}
-                date={goal.date}
-                time={goal.time}
-                complete={goal.completed}
-                user={goal.user_id}
-                tag={goal.tag_id} */}
+                {/* key={goal.id} */}
 
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
@@ -98,31 +92,24 @@ render() {
                 <h1>Focus</h1>
 
         <VirtualPet />
-            <div className="ButtonColumn sixteen wide column">
-                <Link to='/new'>
-                    <button className="ui yellow labeled icon button">
-                    <i className="columns icon"></i>
-                    Create Goal
-                </button></Link>
 
-                <button className="ui yellow   right labeled icon button">
-                    <i className="sticky note icon"></i>
-                    Create Task
-                </button>
-            </div>
   
 
             <div className="ui two column centered grid">
-                <div className="six wide grey column">Placeholder</div>
+                <div className="six wide grey column">
+                    <div className="ButtonColumn centered column">
+                        <Link to='/new'><button className="ui yellow fluid labeled icon button">
+                            <i className="columns icon"></i>
+                            Create Goal
+                        </button></Link>
+                    </div>
+                </div>
                 <div className="eight wide olive column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
             </div>
 
-            
 
-
-        <Footer />
         </div>
     );
   }
