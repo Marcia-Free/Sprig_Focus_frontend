@@ -7,8 +7,7 @@ class Home extends React.Component {
 render() {
     return (
         <div className='Home'>
-            <div className="ui top attached menu">
-            </div>
+            
             <div class="ui divider">
             </div>
 

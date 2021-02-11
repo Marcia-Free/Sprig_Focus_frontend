@@ -3,6 +3,7 @@ import { Link , Redirect} from "react-router-dom";
 import NavBar from './NavBar'
 import Footer from './Footer'
 import VirtualPet from './VirtualPet'
+import Task from './Task'
 
 import logo from '../images/sprig logo.png'
 import { SetStateAction } from '@babylonjs/core';
@@ -56,7 +57,6 @@ class Goal extends React.Component {
     }
 
     markComplete() {
-
       const { match: {params: { id }}} = this.props;
       const url = `http://localhost:3001/api/v1/goals/${id}`;
       
@@ -69,6 +69,7 @@ class Goal extends React.Component {
         body:  JSON.stringify({
           completed: !this.state.goal.completed
         })
+
       }
     //------------------------------
     fetch(url, reqObj)
@@ -89,33 +90,38 @@ class Goal extends React.Component {
 
 
   render() {
+
           const { goal } = this.state;
+          const goalTasks = goal.tasks
+
           let taskList = "No tasks created yet";
 
           const goalDone = (
-            <i class="ui circular olive right floated button" onClick={this.markComplete}>Complete</i>
+            <i className="ui circular olive right floated button" onClick={this.markComplete}>Complete</i>
           )
           const goalNotDone = (
-            <i class="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
+            <i className="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
           )
-          // if (goal.task.length > 0) {
-          //     taskList = goal.info
-          //       .split(",")
-          //       .map((task, index) => (
-          //         <li key={index} className="list-group-item">
-          //           {task}
-          //         </li>
-          //       ));
-          //   }
-          //   const goalInstruction = this.addHtmlEntities(goal.info);
+          
+          
+          const allTasks =  goalTasks.map((task, index) => (
+            <div className='Task item'>
 
-          //     {/* goal={goal.name}
-          //         info={goal.info}
-          //         date={goal.date}
-          //         time={goal.time}
-          //         complete={goal.completed}
-          //         user={goal.user_id}
-          //         tag={goal.tag_id} */}
+            <i className="right triangle icon"></i>
+    
+              <div className="content">
+                <div className="header">{task.name}</div>
+                <div className="description">{task.description}</div>
+              </div>
+
+              <div class="ui small right floated icon buttons">
+                <button class="ui button"><i class="red eraser icon"></i></button>
+                <button class="ui button"><i class="black edit icon"></i></button>
+              </div>
+    
+          </div>
+            ))
+          
     
       return (
           
@@ -128,14 +134,13 @@ class Goal extends React.Component {
 
               <div className="ui two column centered grid">
 
-                  <div className="six wide grey column">
-                    <div className="ButtonColumn centered column">
-                        <Link to={`/goals/${goal.id}/edit`}><button className="ui yellow labeled icon button" >
-                            <i className="columns icon"></i>
+                  <div className="LeftSide six wide column">
+                    <div className="two ui buttons">
+                        <Link to={`/goals/${goal.id}/edit`}><button className="ui yellow left attached button" >
                             Update Goal
                         </button></Link>
-                        <button className="ui yellow right labeled icon button"  onClick={this.handleDelete}>
-                            <i className="sticky note icon"></i>
+
+                        <button className="ui yellow right attached button"  onClick={this.handleDelete}>
                             Delete Goal
                         </button>
                     </div>
@@ -174,7 +179,10 @@ class Goal extends React.Component {
                                           <i className="plus icon"></i>
                                           New Task
                                     </button></Link> 
-                                  {taskList}
+
+                                  <div className= 'ui middle aligned divided list'>
+                                    {goal.tasks.length > 0 ? allTasks : taskList}
+                                  </div>
                               </div> 
                       </div>
                   </div>

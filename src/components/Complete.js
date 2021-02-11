@@ -41,7 +41,7 @@ render() {
                     <button class="circular ui right floated olive icon button">
                         <i class="check icon"></i>
                     </button>
-                    <div className="header">{goal.name}</div>
+                    <div className="header">{goal.name} <i class="small right floated list icon"> {goal.tasks.length}</i></div>
                 </div>
 
                 <div className="black description">
@@ -91,7 +91,7 @@ render() {
   
 
             <div className="ui two column centered grid">
-                <div className="six wide grey column">Placeholder</div>
+                <div className="LeftSide six wide column">Placeholder</div>
                 <div className="eight wide olive column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>

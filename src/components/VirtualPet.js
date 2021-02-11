@@ -28,6 +28,10 @@ render() {
 
 
     onSceneReady = scene => {
+
+           // Default Environment
+
+    
         // This creates and positions a free camera (non-mesh)
         var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
         // This targets the camera to scene origin

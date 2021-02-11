@@ -14,8 +14,8 @@ class Goals extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://localhost:3001/api/v1/goals";
-        fetch(url)
+        const urlGoal = "http://localhost:3001/api/v1/goals";
+        fetch(urlGoal)
           .then(response => {
             if (response.ok) {
               return response.json();
@@ -24,6 +24,7 @@ class Goals extends React.Component {
           })
           .then(response => this.setState({ goals: response }))
           .catch(() => this.props.history.push("/"));
+
     }
 
 
@@ -42,10 +43,10 @@ render() {
 
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
-                    {/* <button class="circular ui right floated icon button" onClick={this.markComplete}> */}
-                        {/* <i class="check icon"></i> */}
-                    {/* </button> */}
-                    <div className="header">{goal.name}</div>
+                    {/* <button class="circular ui right floated olive icon button">
+                        <i class="check icon"></i>
+                    </button> */}
+                    <div className="header">{goal.name} <i class="small right floated list icon"> {goal.tasks.length}</i> </div>
                 </div>
 
                 <div className="black description">
@@ -96,7 +97,7 @@ render() {
   
 
             <div className="ui two column centered grid">
-                <div className="six wide grey column">
+                <div className="LeftSide six wide column">
                     <div className="ButtonColumn centered column">
                         <Link to='/new'><button className="ui yellow fluid labeled icon button">
                             <i className="columns icon"></i>

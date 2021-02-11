@@ -1,6 +1,9 @@
 .App {
     text-align: center;
     background-color: #282c34;
+    width: auto;
+    /* margin-left: 1em;
+    margin-right: 1em; */
   }
 
   body{
@@ -8,17 +11,30 @@
   }
 
   .Home {
-    text-align: center; 
+    text-align: center;
+    display: block;
+    /* font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    max-width: 700px !important;
+    line-height: 1.5; */
   }
 
   #my-canvas {
-    width:89%;
+    width:75%;
     height:400px;
     touch-action:none;
   }
 
-  .ui.top.attached.menu {
+  .LeftSide.six.wide.column {
+    background-color: rgb(252, 233, 208);
+
+  }
+
+
+  .ui.menu {
     background-color: rgb(252, 246, 238);
+    /* position: fixed; */
+    top: 0;
+    width: 100%;
   }
 
   .ui.placeholder.segment {
@@ -34,10 +50,6 @@
   .GoalCard {
     color: rgb(31, 31, 31);
     text-align: left; 
-  }
-
-  .ButtonColumn {
-    margin-bottom: 20px;
   }
 
 

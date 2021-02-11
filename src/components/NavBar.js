@@ -10,7 +10,7 @@ class NavBar extends React.Component {
 render() {
     return (
         <div className='NavBar'>
-            <div className="ui top attached menu">
+            <div className="ui mini menu">
 
                 <div className="ui dropdown icon item">
                     <img className="ui mini circular image" src={logo}/>
