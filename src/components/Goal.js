@@ -5,22 +5,21 @@ import Footer from './Footer'
 import VirtualPet from './VirtualPet'
 
 import logo from '../images/sprig logo.png'
+import { SetStateAction } from '@babylonjs/core';
 
 class Goal extends React.Component {
+  
+
     constructor(props) {
         super(props);
         this.state = { goal: { tasks: [] } };
 
           this.handleDelete = this.handleDelete.bind(this);
-          this.handleUpdate = this.handleUpdate.bind(this);
+          this.markComplete = this.markComplete.bind(this);
     }
 
     componentDidMount() {
-        const {
-            match: {
-              params: { id }
-            }
-          } = this.props;
+      const { match: {params: { id }}} = this.props;
       
         const url = `http://localhost:3001/api/v1/goals/${id}`;
 
@@ -36,13 +35,8 @@ class Goal extends React.Component {
     }
 
     handleDelete() {
-        const {
-            match: {
-              params: { id }
-            }
-        } = this.props;
-
-        const url = `http://localhost:3001/api/v1/goals/${id}`;
+      const { match: {params: { id }}} = this.props;
+      const url = `http://localhost:3001/api/v1/goals/${id}`;
 
         fetch(url, {
             method: "DELETE",
@@ -61,93 +55,134 @@ class Goal extends React.Component {
 
     }
 
-    handleUpdate() {
-        const {
-            match: {
-              params: { id }
-            }
-        } = this.props;
-        
+    markComplete() {
+
+      const { match: {params: { id }}} = this.props;
+      const url = `http://localhost:3001/api/v1/goals/${id}`;
+      
+       //-----------------------
+      const reqObj = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:  JSON.stringify({
+          completed: !this.state.goal.completed
+        })
+      }
+    //------------------------------
+    fetch(url, reqObj)
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error("Network response was not ok.");
+        })
+        .then(response => this.props.history.push(`/goals/${response.id}`))
+        .catch(error => console.log(error.message));
+
+        this.setState({
+          goal: {...this.state.goal, completed: !this.state.goal.completed}
+        })
+
     }
 
 
-render() {
-        const { goal } = this.state;
-        let taskList = "No tasks created yet";
+  render() {
+          const { goal } = this.state;
+          let taskList = "No tasks created yet";
 
-        // if (goal.task.length > 0) {
-        //     taskList = goal.info
-        //       .split(",")
-        //       .map((task, index) => (
-        //         <li key={index} className="list-group-item">
-        //           {task}
-        //         </li>
-        //       ));
-        //   }
-        //   const goalInstruction = this.addHtmlEntities(goal.info);
+          const goalDone = (
+            <i class="ui circular olive right floated button" onClick={this.markComplete}>Complete</i>
+          )
+          const goalNotDone = (
+            <i class="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
+          )
+          // if (goal.task.length > 0) {
+          //     taskList = goal.info
+          //       .split(",")
+          //       .map((task, index) => (
+          //         <li key={index} className="list-group-item">
+          //           {task}
+          //         </li>
+          //       ));
+          //   }
+          //   const goalInstruction = this.addHtmlEntities(goal.info);
 
-        //     {/* goal={goal.name}
-        //         info={goal.info}
-        //         date={goal.date}
-        //         time={goal.time}
-        //         complete={goal.completed}
-        //         user={goal.user_id}
-        //         tag={goal.tag_id} */}
-  
-    return (
-        
-        <div className='Goals'>
-        <NavBar />
+          //     {/* goal={goal.name}
+          //         info={goal.info}
+          //         date={goal.date}
+          //         time={goal.time}
+          //         complete={goal.completed}
+          //         user={goal.user_id}
+          //         tag={goal.tag_id} */}
+    
+      return (
+          
+          <div className='Goals'>
+          <NavBar />
 
-                <h1>Goal</h1>
+                  <h1>Goal</h1>
 
-        <VirtualPet />
+          <VirtualPet />
 
-            <div className="ButtonColumn sixteen wide column">
-                <button className="ui orange labeled icon button" onClick={this.handleUpdate}>
-                    <i className="columns icon"></i>
-                    Update Goal
-                </button>
-                <button className="ui orange right labeled icon button"  onClick={this.handleDelete}>
-                    <i className="sticky note icon"></i>
-                    Delete Goal
-                </button>
-            </div>
-  
+              <div className="ButtonColumn sixteen wide column">
+                  <Link to='/update/:id'><button className="ui orange labeled icon button" >
+                      <i className="columns icon"></i>
+                      Update Goal
+                  </button></Link>
+                  <button className="ui orange right labeled icon button"  onClick={this.handleDelete}>
+                      <i className="sticky note icon"></i>
+                      Delete Goal
+                  </button>
+              </div>
+    
 
-            <div className="ui two column centered grid">
+              <div className="ui two column centered grid">
 
-                <div className="six wide green column">test</div>
-                <div className="eight wide olive column">
-                    <div className="ui segments">
-                            <a className="ui small image"> <img src={logo}/> </a>
+                  <div className="six wide grey column">Placeholder</div>
+                  <div className="eight wide olive column">
+                      <div className="ui segments">
+                              <a className="ui small image"> <img src={logo}/> </a>
 
-                            <div className="ui segment">
-                                <h2 class="ui header">
-                                    <i class="ui circular olive right floated button">Complete</i>
-                                    <div class="content"> {goal.name} </div>
-                                </h2>
-                            </div>
-                            <div className='ui secondary segment'>
-                                <div className="ui divider">Info</div>
-                                <div className="description"> <p>{goal.info}</p> </div>
-                            
-                            
-                                <a className="header"> <h3>Tasks</h3> </a>
-                                <div className="ui divider"></div>
-                                {taskList}
-                            </div> 
-                    </div>
-                </div>
-            </div>
+                              <div className="ui segment">
+                                  <h2 class="ui header">
+                                      {goal.completed === true ? goalDone : goalNotDone}
+                                      <div class="content"> {goal.name} </div>
+                                  </h2>
+                              </div>
 
-            
+                              <div className='ui two column grid'>
+                                <span class="ui column">
+                                  <i class="calendar outline icon"></i>
+                                  {goal.date}
+                                </span>
+                                <span class="ui column">
+                                  <i class="clock outline icon"></i>
+                                  {goal.time}
+                                </span>   
+                              </div>
+
+                                  <div className='ui secondary segment'>
+                                  <div className="ui header">Info</div>
+                                  <div className="description"> <p>{goal.info}</p> </div>
+                              
+                              
+                                  <a className="header"> <h3>Tasks</h3> </a>
+                                  <div className="ui divider"></div>
+                                  {taskList}
+                              </div> 
+                      </div>
+                  </div>
+              </div>
+
+              
 
 
-        <Footer />
-        </div>
-    );
-  }
+          <Footer />
+          </div>
+      );
+    }
 
 
 }

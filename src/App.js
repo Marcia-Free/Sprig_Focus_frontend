@@ -10,7 +10,8 @@ import Goals from './components/Goals'
 import Goal from './components/Goal'
 import Complete from './components/Complete'
 
-import Form from './components/Form'
+import newForm from './components/newForm'
+import updateForm from './components/updateForm'
 
 
 
@@ -25,7 +26,8 @@ function App() {
           <Route exact path = {'/goals/:id'} component={Goal} />
           <Route exact path = {'/completed'} component={Complete} />
 
-          <Route exact path = {'/new'} component={Form} />
+          <Route exact path = {'/new'} component={newForm} />
+          <Route exact path = {'/update/:id'} component={updateForm} />
         </Switch>
     </div>
   );

@@ -6,7 +6,7 @@ import Footer from './Footer'
 
 import logo from '../images/sprig logo.png'
 
-class Form extends React.Component {
+class newForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,11 +31,10 @@ class Form extends React.Component {
         });
     }
 
-
     onSubmit(event) {
     event.preventDefault();
     const url = "http://localhost:3001/api/v1/goals";
-    const newGoal = {...this.state, completed: false}
+    const newGoal = {...this.state, time: this.state.time}
     //-----------------------
     const reqObj = {
       method: 'POST',
@@ -55,9 +54,6 @@ class Form extends React.Component {
         .then(response => this.props.history.push(`/goals/${response.id}`))
         .catch(error => console.log(error.message));
     }
-
-
-
 
 
 
@@ -111,4 +107,4 @@ render() {
 
 
 }
-export default Form;
+export default newForm;

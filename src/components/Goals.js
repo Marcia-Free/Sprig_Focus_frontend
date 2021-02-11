@@ -27,10 +27,16 @@ class Goals extends React.Component {
     }
 
 
+
 render() {
         const { goals } = this.state;
 
-        const allGoals = goals.map((goal, index) => (
+
+        const currentGoals = goals.filter((goal, index) => (
+            goal.completed === false
+        ));
+
+        const allGoals = currentGoals.map((goal, index) => (
             <div className='GoalCard grey ui fluid card'>
             {/* goal={goal.name}
                 info={goal.info}
@@ -41,8 +47,10 @@ render() {
                 tag={goal.tag_id} */}
 
                 <div className="content">
-                    <i class="right floated like icon">{goal.tag_id}</i>
-                    <i class="right floated check icon">{goal.completed}</i>
+                    {/* <i class="right floated like icon">{goal.tag_id}</i> */}
+                    {/* <button class="circular ui right floated icon button" onClick={this.markComplete}> */}
+                        {/* <i class="check icon"></i> */}
+                    {/* </button> */}
                     <div className="header">{goal.name}</div>
                 </div>
 
@@ -69,8 +77,10 @@ render() {
             </div>
         ));
 
+
+
         const noGoals = (
-            <div className='GoalCard ui card'>
+            <div className='GoalCard ui header'>
             <h4>
                 No goals yet. Why not add a new one?
             </h4>
@@ -78,6 +88,7 @@ render() {
         )
 
 
+    
 
     return (
         
@@ -93,7 +104,8 @@ render() {
                     <i className="columns icon"></i>
                     Create Goal
                 </button></Link>
-                <button className="ui yellow right labeled icon button">
+
+                <button className="ui yellow   right labeled icon button">
                     <i className="sticky note icon"></i>
                     Create Task
                 </button>
@@ -101,7 +113,7 @@ render() {
   
 
             <div className="ui two column centered grid">
-                <div className="six wide green column">Placeholder</div>
+                <div className="six wide grey column">Placeholder</div>
                 <div className="eight wide olive column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
