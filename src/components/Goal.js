@@ -127,7 +127,7 @@ class Goal extends React.Component {
           <VirtualPet />
 
               <div className="ButtonColumn sixteen wide column">
-                  <Link to='/update/:id'><button className="ui orange labeled icon button" >
+                  <Link to={`/goals/${goal.id}/edit`}><button className="ui orange labeled icon button" >
                       <i className="columns icon"></i>
                       Update Goal
                   </button></Link>

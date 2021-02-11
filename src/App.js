@@ -27,7 +27,7 @@ function App() {
           <Route exact path = {'/completed'} component={Complete} />
 
           <Route exact path = {'/new'} component={newForm} />
-          <Route exact path = {'/update/:id'} component={updateForm} />
+          <Route exact path = {'/goals/:id/edit'} component={updateForm} />
         </Switch>
     </div>
   );

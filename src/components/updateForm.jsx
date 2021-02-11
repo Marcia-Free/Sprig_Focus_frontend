@@ -30,28 +30,30 @@ class updateForm extends React.Component {
               throw new Error("Network response was not ok.");
           })
           .then(response => this.setState({ goal: response }))
-          .catch(() => this.props.history.push(`/update/${id}`));
-
-          console.log(this.state)
+          .catch(() => this.props.history.push(`/goals/${id}`));
       }
 
     onChange = (event) => {
         this.setState({ 
-            [event.target.name]: event.target.value    
+            goal: {...this.state.goal, [event.target.name]: event.target.value }   
+            
         });
+
     }
 
     onSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/goals";
-    const newGoal = {...this.state, time: this.state.time}
+
+    const { match: {params: { id }}} = this.props;
+    const url = `http://localhost:3001/api/v1/goals/${id}`;
+    const updatedGoal = {...this.state}
     //-----------------------
     const reqObj = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify(newGoal)
+      body:  JSON.stringify(updatedGoal)
     }
     //------------------------------
     fetch(url, reqObj)
@@ -65,37 +67,6 @@ class updateForm extends React.Component {
         .catch(error => console.log(error.message));
     }
 
-    markComplete() {
-
-        const { match: {params: { id }}} = this.props;
-        const url = `http://localhost:3001/api/v1/goals/${id}`;
-        
-         //-----------------------
-        const reqObj = {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body:  JSON.stringify({
-            completed: !this.state.goal.completed
-          })
-        }
-      //------------------------------
-      fetch(url, reqObj)
-          .then(response => {
-          if (response.ok) {
-              return response.json();
-          }
-          throw new Error("Network response was not ok.");
-          })
-          .then(response => this.props.history.push(`/goals/${response.id}`))
-          .catch(error => console.log(error.message));
-  
-          this.setState({
-            goal: {...this.state.goal, completed: !this.state.goal.completed}
-          })
-  
-      }
 
 
 
@@ -121,7 +92,7 @@ render() {
                                     <h3 class="ui header">
                                         <div className="field">
                                             <label>Name</label>
-                                            <input type="text" name="name" placeholder="Goal Name" onChange={this.onChange}/>
+                                            <input type="text" name="name" placeholder={this.state.goal.name} onChange={this.onChange}/>
                                         </div>
                                     </h3>
                                 </div>
@@ -129,22 +100,23 @@ render() {
                                 <div className='ui olive segment'>
                                     <div className="field">
                                         <i class="calendar outline icon"></i><label>Date </label>
-                                        <input type="date" name="date" onChange={this.onChange}/>
+                                        <input type="date" name="date" placeholder={this.state.goal.date} onChange={this.onChange}/>
                                     </div>
                                 
                                     <div className="field">
                                         <i class="clock outline icon"></i><label>Time </label>
-                                        <input type="time" name="time" onChange={this.onChange}/>
+                                        <input type="time" name="time" placeholder={this.state.goal.time} onChange={this.onChange}/>
                                     </div>
                                 </div>
 
                                 <div className='ui secondary olive segment'>
                                     <div className="ui header">Info</div>
                                         <div className="field">
-                                        <textarea rows="4" name="info" placeholder="Description" onChange={this.onChange}/>
+                                        <textarea rows="4" name="info" placeholder={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
 
                                     <button className="ui fluid large yellow submit button" type="submit">Update Goal</button>
+                                    <Link to={`/goals/${this.state.goal.id}`}><button className="ui fluid large red submit button">Go Back</button></Link>
                                     <div class="ui error message"></div>
                                 
                                     <div className="ui divider"></div>
