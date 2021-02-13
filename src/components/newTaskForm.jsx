@@ -11,7 +11,7 @@ class newTaskForm extends React.Component {
             name: "",
             description: "",
             completed: false,
-            goal_id: 0,
+            goal_id: this.props.location.state.goal_id,
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -46,7 +46,7 @@ class newTaskForm extends React.Component {
         }
         throw new Error("Network response was not ok.");
         })
-        .then(response => this.props.history.push(`/tasks/${response.id}`))
+        .then(response => this.props.history.push(`/goals/${this.state.goal_id}`))
         .catch(error => console.log(error.message));
     }
 
@@ -58,7 +58,10 @@ render() {
         <div className='Goals'>
         <NavBar />
 
-                <h1 className="ui yellow image header">What will you accomplish today?</h1>
+            <div class="ui items">
+                <h1 className="ui yellow image header">{this.props.location.state.goal_name}</h1>
+                <div class="content"> <h3 className="description">New Task</h3> </div>
+            </div> 
 
 
             <div className="ui two column centered grid">
@@ -72,23 +75,12 @@ render() {
                         </div>
 
                         <div className="field">
-                            <label>Info</label>
-                            <textarea rows="3" name="info" placeholder="Description" onChange={this.onChange}/>
+                            <label>Extra Info</label>
+                            <textarea rows="3" name="description" placeholder="Description" onChange={this.onChange}/>
                         </div>
 
-                        <div className="fields">
-                            <div className="field">
-                            <label>Date</label>
-                            <input type="date" name="date" onChange={this.onChange}/>
-                            </div>
-                            
-                            <div className="field">
-                            <label>Time</label>
-                            <input type="time" name="time" onChange={this.onChange}/>
-                            </div>
-                        </div>
 
-                        <button className="ui fluid large yellow submit button" type="submit">Add Goal</button>
+                        <button className="ui fluid large yellow submit button" type="submit">Add Task</button>
                         <div class="ui error message"></div>
                         
                     </form>

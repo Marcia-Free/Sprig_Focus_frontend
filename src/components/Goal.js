@@ -12,7 +12,9 @@ class Goal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { goal: { tasks: [] } };
+        this.state = { 
+          goal: { tasks: [] },
+          numoftasks: 0 };
 
           this.handleDelete = this.handleDelete.bind(this);
           this.markComplete = this.markComplete.bind(this);
@@ -32,6 +34,10 @@ class Goal extends React.Component {
         })
         .then(response => this.setState({ goal: response }))
         .catch(() => this.props.history.push("/goals"));
+
+
+
+
     }
 
     handleDelete() {
@@ -87,26 +93,25 @@ class Goal extends React.Component {
 
     }
 
-    testDelete(event) {
-      console.log(this.state)
+    taskDelete(taskid) {
       const { match: {params: { id }}} = this.props;
+      const url = `http://localhost:3001/api/v1/tasks/${taskid}`;
 
-      // const url = `http://localhost:3001/api/v1/tasks/${id}`;
+        fetch(url, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              }
+              throw new Error("Network response was not ok.");
+            })
+            .then(() => this.props.history.push(`/goals/${id}`))
+            .catch(error => console.log(error.message));
 
-      //   fetch(url, {
-      //       method: "DELETE",
-      //       headers: {
-      //         "Content-Type": "application/json"
-      //       }
-      //     })
-      //       .then(response => {
-      //         if (response.ok) {
-      //           return response.json();
-      //         }
-      //         throw new Error("Network response was not ok.");
-      //       })
-      //       .then(() => this.props.history.push("/goals"))
-      //       .catch(error => console.log(error.message));
     }
 
 
@@ -114,6 +119,7 @@ class Goal extends React.Component {
 
           const { goal } = this.state;
           const goalTasks = goal.tasks
+          const goalID = goal.id
 
           let taskList = "No tasks created yet";
 
@@ -126,6 +132,7 @@ class Goal extends React.Component {
           
           
           const allTasks =  goalTasks.map((task, index) => (
+
             <div className='Task item'>
 
             <i className="right triangle icon"></i>
@@ -136,11 +143,12 @@ class Goal extends React.Component {
               </div>
 
               <div class="ui small right floated icon buttons">
-                <button class="ui button" onClick={this.testDelete}><i class="red eraser icon"></i></button>
+                <button class="ui button" onClick={() => this.taskDelete(task.id)}><i class="red eraser icon"></i></button>
                 <button class="ui button"><i class="black edit icon"></i></button>
               </div>
     
           </div>
+
             ))
           
     
@@ -197,12 +205,13 @@ class Goal extends React.Component {
                                   <a className="header"> <h3>Tasks</h3></a>
                                   <div className="ui divider"></div>
                                   
-                                    <Link to='/tasks/new'><button className="ui yellow basic fluid labeled icon button">
+                                    <Link to={{pathname: '/tasks/new', state: {goal_name: goal.name, goal_id: goalID}}}><button className="ui yellow basic fluid labeled icon button">
                                           <i className="plus icon"></i>
                                           New Task
                                     </button></Link> 
 
                                   <div className= 'ui middle aligned divided list'>
+
                                     {goal.tasks.length > 0 ? allTasks : taskList}
                                   </div>
                               </div> 
