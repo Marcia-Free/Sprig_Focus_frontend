@@ -9,6 +9,7 @@ import { SetStateAction } from '@babylonjs/core';
 
 class Goal extends React.Component {
   
+  
 
     constructor(props) {
         super(props);
@@ -34,10 +35,19 @@ class Goal extends React.Component {
         })
         .then(response => this.setState({ goal: response }))
         .catch(() => this.props.history.push("/goals"));
+    }
 
+    componentDidUpdate(prevProps, prevState) {
+      
+      const tasklistlength = this.state.goal.tasks.length
 
+      if(prevState.numoftasks !== tasklistlength) {
+        console.log(prevState.numoftasks, tasklistlength)
 
-
+        this.setState({
+          numoftasks: tasklistlength
+        })
+      }
     }
 
     handleDelete() {
@@ -93,9 +103,34 @@ class Goal extends React.Component {
 
     }
 
-    taskDelete(taskid) {
+    grabTasks() {
+      const { goal } = this.state;
+      const tasklistlength = goal.tasks.length
+
+      return goal.tasks.map((task, index) => (
+
+        <div className='Task item'>
+
+        <i className="right triangle icon"></i>
+
+          <div className="content">
+            <div className="header">{task.name}</div>
+            <div className="description">{task.description}</div>
+          </div>
+
+          <div class="ui small right floated icon buttons">
+            <button class="ui button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i></button>
+            <Link to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><button class="ui button"><i class="black edit icon"></i></button></Link>
+          </div>
+
+      </div>
+        ))
+
+    }
+
+    taskDelete(task) {
       const { match: {params: { id }}} = this.props;
-      const url = `http://localhost:3001/api/v1/tasks/${taskid}`;
+      const url = `http://localhost:3001/api/v1/tasks/${task.id}`;
 
         fetch(url, {
             method: "DELETE",
@@ -111,7 +146,6 @@ class Goal extends React.Component {
             })
             .then(() => this.props.history.push(`/goals/${id}`))
             .catch(error => console.log(error.message));
-
     }
 
 
@@ -130,26 +164,6 @@ class Goal extends React.Component {
             <i className="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
           )
           
-          
-          const allTasks =  goalTasks.map((task, index) => (
-
-            <div className='Task item'>
-
-            <i className="right triangle icon"></i>
-    
-              <div className="content">
-                <div className="header">{task.name}</div>
-                <div className="description">{task.description}</div>
-              </div>
-
-              <div class="ui small right floated icon buttons">
-                <button class="ui button" onClick={() => this.taskDelete(task.id)}><i class="red eraser icon"></i></button>
-                <button class="ui button"><i class="black edit icon"></i></button>
-              </div>
-    
-          </div>
-
-            ))
           
     
       return (
@@ -212,7 +226,7 @@ class Goal extends React.Component {
 
                                   <div className= 'ui middle aligned divided list'>
 
-                                    {goal.tasks.length > 0 ? allTasks : taskList}
+                                  {goalTasks.length > 0 ? this.grabTasks() : taskList}
                                   </div>
                               </div> 
                       </div>

@@ -13,6 +13,7 @@ import Complete from './components/Complete'
 import newForm from './components/newForm'
 import newTaskForm from './components/newTaskForm'
 import updateForm from './components/updateForm'
+import updateTaskForm from './components/updateTaskForm'
 
 
 
@@ -32,7 +33,7 @@ function App() {
 
           {/* <Route exact path = {'/tasks/:id'} component={Task} /> */}
           <Route exact path = {'/tasks/new'} component={newTaskForm} />
-          {/* <Route exact path = {'/tasks/:id/edit'} component={updateForm} /> */}
+          <Route exact path = {'/tasks/:id/edit'} component={updateTaskForm} />
         </Switch>
     </div>
   );

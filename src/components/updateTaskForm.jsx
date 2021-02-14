@@ -4,39 +4,52 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 
 
-class newTaskForm extends React.Component {
+class updateTaskForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            description: "",
-            completed: false,
-            goal_id: this.props.location.state.goal_id,
+            task: []
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    
-
     }
+
+    componentDidMount() {
+        const { match: {params: { id }}} = this.props;
+        
+          const url = `http://localhost:3001/api/v1/tasks/${id}`;
+  
+          fetch(url)
+          .then(response => {
+              if (response.ok) {
+              return response.json();
+              }
+              throw new Error("Network response was not ok.");
+          })
+          .then(response => this.setState({ task: response }))
+          .catch(() => this.props.history.push(`/tasks/${id}`));
+      }
 
 
     onChange = (event) => {
         this.setState({ 
-            [event.target.name]: event.target.value    
+            task: {...this.state.task, [event.target.name]: event.target.value }    
         });
     }
 
     onSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/tasks";
-    const newTask = {...this.state}
+
+    const { match: {params: { id }}} = this.props;
+    const url = `http://localhost:3001/api/v1/tasks/${id}`;
+    const updatedTask = {...this.state}
     //-----------------------
     const reqObj = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify(newTask)
+      body:  JSON.stringify(updatedTask)
     }
     //------------------------------
     fetch(url, reqObj)
@@ -46,7 +59,7 @@ class newTaskForm extends React.Component {
         }
         throw new Error("Network response was not ok.");
         })
-        .then(response => this.props.history.push(`/goals/${this.state.goal_id}`))
+        .then(response => this.props.history.push(`/goals/${this.state.task.goal_id}`))
         .catch(error => console.log(error.message));
     }
 
@@ -55,7 +68,7 @@ class newTaskForm extends React.Component {
 render() {      
     return (
         
-        <div className='Goals'>
+        <div className='Task'>
         <NavBar />
 
             <div class="ui items">
@@ -70,16 +83,16 @@ render() {
                         
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" name="name" placeholder="Goal Name" onChange={this.onChange}/>
+                            <input type="text" name="name" placeholder={this.state.task.name }onChange={this.onChange}/>
                         </div>
 
                         <div className="field">
                             <label>Extra Info</label>
-                            <textarea rows="3" name="description" placeholder="Description" onChange={this.onChange}/>
+                            <textarea rows="3" name="description" placeholder={this.state.task.description} onChange={this.onChange}/>
                         </div>
 
 
-                        <button className="ui fluid large yellow submit button" type="submit">Add Task</button>
+                        <button className="ui fluid large yellow submit button" type="submit">Update Task</button>
                         <div class="ui error message"></div>
                         
                     </form>
@@ -93,4 +106,4 @@ render() {
 
 
 }
-export default newTaskForm;
+export default updateTaskForm;
