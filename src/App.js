@@ -5,7 +5,7 @@ import './components/Theme.css';
 
 import Home from './components/Home'
 import SignUp from './components/SignUp'
-import SignIn from './components/SignIn'
+import Login from './components/Login'
 import Goals from './components/Goals'
 import Goal from './components/Goal'
 import Complete from './components/Complete'
@@ -18,12 +18,15 @@ import updateTaskForm from './components/updateTaskForm'
 
 
 function App() {
+
+
   return (
     <div className='App'>
         <Switch>
           <Route exact path ={'/'} component={Home} />
           <Route exact path={'/signup'} component={SignUp} />
-          <Route exact path = {'/signin'} component={SignIn} />
+          <Route exact path = {'/login'} component={Login} />
+          {/* <Route exact path = {'/goals'} component={Goals} /> */}
           <Route exact path = {'/goals'} component={Goals} />
           <Route exact path = {'/completed'} component={Complete} />
 

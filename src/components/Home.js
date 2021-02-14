@@ -1,44 +1,94 @@
-import React from 'react'
+  import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/sprig logo.png'
 
-class Home extends React.Component {
+import FormSection from './LoginFormSection'
 
-render() {
+import SignUp from './SignUp'
+import Login from './Login'
+
+function Home(props) {
+
+    const [user, setUser] = useState({})
+    const [form, setForm] = useState("")
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if(token){
+          fetch(`http://localhost:3001/api/v1/auto_login`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(resp => resp.json())
+          .then(data => {
+            setUser(data)
+            // console.log(data)
+          })
+        }
+      }, [])
+    
+
+      const handleAuthClick = () => {
+        const token = localStorage.getItem("token")
+        fetch(`http://localhost:3001/user_is_authed`, {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        .then(data => props.history.push(`/goals`))
+      }
+
+
+      const handleLogin = (user) => {
+        setUser(user)
+      }
+    
+      const handleFormSwitch = (input) => {
+        setForm(input)
+      }
+
+      const renderForm = () => {
+        switch(form){
+          case "login":
+            return <Login handleLogin={handleLogin}/>
+            break;
+          default:
+            return <SignUp handleLogin={handleLogin}/>
+        }
+      }
+      
+
+
+    console.log(user)
+
     return (
         <div className='Home'>
             
-            <div class="ui divider">
+            <div className="ui divider">
+                
+                <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
             </div>
 
             <div>
                 <h1>Sprig Goals</h1>
-                <img class="ui big centered circular image" src={logo}></img>
+                <img className="ui large centered circular image" src={logo}></img>
             </div>
 
 
 
-            <div class="ui placeholder segment">
-                <div class="ui two column stackable center aligned grid">
-                    <div class="ui vertical divider">Or</div>
-
-                    <div class="column">
-                        <i class="huge orange user plus icon"></i>
-                        <Link to='/signup'> <button className="ui yellow large button">New User</button></Link>  
+            <div className="ui placeholder segment">
+                <FormSection handleFormSwitch={handleFormSwitch}/>
+                    <div className="ui segment">
+                        {renderForm()}
                     </div>
-                    <div class="column">
-                        <i class="huge orange users icon"></i>
-                        <Link to='/signin'><button className="ui yellow large button">Existing User</button></Link>
-                    </div>
-
-                </div>
-                
             </div>
 
 
         </div>
     );
-  }
 
 
 }

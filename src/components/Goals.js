@@ -14,7 +14,7 @@ class Goals extends React.Component {
     }
 
     componentDidMount() {
-        const urlGoal = "http://localhost:3001/api/v1/goals";
+        const urlGoal = "http://localhost:3001/goals";
         fetch(urlGoal)
           .then(response => {
             if (response.ok) {
