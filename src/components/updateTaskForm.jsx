@@ -17,7 +17,7 @@ class updateTaskForm extends React.Component {
     componentDidMount() {
         const { match: {params: { id }}} = this.props;
         
-          const url = `http://localhost:3001/api/v1/tasks/${id}`;
+          const url = `http://localhost:3001/tasks/${id}`;
   
           fetch(url)
           .then(response => {
@@ -41,7 +41,7 @@ class updateTaskForm extends React.Component {
     event.preventDefault();
 
     const { match: {params: { id }}} = this.props;
-    const url = `http://localhost:3001/api/v1/tasks/${id}`;
+    const url = `http://localhost:3001/tasks/${id}`;
     const updatedTask = {...this.state}
     //-----------------------
     const reqObj = {
@@ -83,12 +83,12 @@ render() {
                         
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" name="name" placeholder={this.state.task.name }onChange={this.onChange}/>
+                            <input type="text" name="name" value={this.state.task.name} onChange={this.onChange}/>
                         </div>
 
                         <div className="field">
                             <label>Extra Info</label>
-                            <textarea rows="3" name="description" placeholder={this.state.task.description} onChange={this.onChange}/>
+                            <textarea rows="3" name="description" value={this.state.task.description} onChange={this.onChange}/>
                         </div>
 
 

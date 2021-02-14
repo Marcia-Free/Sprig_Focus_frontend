@@ -7,6 +7,9 @@ import VirtualPet from './VirtualPet'
 import logo from '../images/sprig logo.png'
 import { SetStateAction } from '@babylonjs/core';
 
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
+
 class Goal extends React.Component {
   
   
@@ -22,9 +25,14 @@ class Goal extends React.Component {
     }
 
     componentDidMount() {
+
+      if (!this.props.currentUser) {
+        this.props.history.push('/')
+    }
+
       const { match: {params: { id }}} = this.props;
       
-        const url = `http://localhost:3001/api/v1/goals/${id}`;
+        const url = `http://localhost:3001/goals/${id}`;
 
         fetch(url)
         .then(response => {
@@ -52,7 +60,10 @@ class Goal extends React.Component {
 
     handleDelete() {
       const { match: {params: { id }}} = this.props;
-      const url = `http://localhost:3001/api/v1/goals/${id}`;
+      const { goal } = this.state;
+      
+      const correctPath = goal.completed === false ? '/goals' : '/completed'
+      const url = `http://localhost:3001/goals/${id}`;
 
         fetch(url, {
             method: "DELETE",
@@ -66,14 +77,14 @@ class Goal extends React.Component {
               }
               throw new Error("Network response was not ok.");
             })
-            .then(() => this.props.history.push("/goals"))
+            .then(() => this.props.history.push(correctPath))
             .catch(error => console.log(error.message));
 
     }
 
     markComplete() {
       const { match: {params: { id }}} = this.props;
-      const url = `http://localhost:3001/api/v1/goals/${id}`;
+      const url = `http://localhost:3001/goals/${id}`;
       
        //-----------------------
       const reqObj = {
@@ -130,7 +141,7 @@ class Goal extends React.Component {
 
     taskDelete(task) {
       const { match: {params: { id }}} = this.props;
-      const url = `http://localhost:3001/api/v1/tasks/${task.id}`;
+      const url = `http://localhost:3001/tasks/${task.id}`;
 
         fetch(url, {
             method: "DELETE",
@@ -239,4 +250,11 @@ class Goal extends React.Component {
 
 
 }
-export default Goal;
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser,
+    goals: state.goals
+  }
+}
+export default connect(mapStateToProps)(Goal);

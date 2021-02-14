@@ -4,6 +4,9 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import VirtualPet from './VirtualPet'
 
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
+
 
 class Goals extends React.Component {
     constructor(props) {
@@ -14,6 +17,11 @@ class Goals extends React.Component {
     }
 
     componentDidMount() {
+
+        if (!this.props.currentUser) {
+            this.props.history.push('/')
+        }
+
         const urlGoal = "http://localhost:3001/goals";
         fetch(urlGoal)
           .then(response => {
@@ -24,7 +32,6 @@ class Goals extends React.Component {
           })
           .then(response => this.setState({ goals: response }))
           .catch(() => this.props.history.push("/"));
-
     }
 
 
@@ -114,7 +121,15 @@ render() {
         </div>
     );
   }
-
-
 }
-export default Goals;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      goals: state.goals
+    }
+  }
+
+
+
+export default connect(mapStateToProps)(Goals);

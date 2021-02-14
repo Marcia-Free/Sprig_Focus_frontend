@@ -4,43 +4,15 @@ import logo from '../images/sprig logo.png'
 
 import FormSection from './LoginFormSection'
 
+import NavBar from './NavBar'
 import SignUp from './SignUp'
 import Login from './Login'
 
-function Home(props) {
+const  Home = (props) => {
 
     const [user, setUser] = useState({})
     const [form, setForm] = useState("")
-
-    useEffect(() => {
-        const token = localStorage.getItem("token")
-        if(token){
-          fetch(`http://localhost:3001/api/v1/auto_login`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-          .then(resp => resp.json())
-          .then(data => {
-            setUser(data)
-            // console.log(data)
-          })
-        }
-      }, [])
     
-
-      const handleAuthClick = () => {
-        const token = localStorage.getItem("token")
-        fetch(`http://localhost:3001/user_is_authed`, {
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
-        })
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-        .then(data => props.history.push(`/goals`))
-      }
-
 
       const handleLogin = (user) => {
         setUser(user)
@@ -61,23 +33,19 @@ function Home(props) {
       }
       
 
-
-    console.log(user)
-
     return (
         <div className='Home'>
+
+          <NavBar/>
             
-            <div className="ui divider">
-                
-                <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
+
+            <div className="TitleContainer">
+                {/* <img className="ui large centered circular image" src={logo}></img> */}
+                <img className="HomeImage ui centered image" src=' https://i.imgur.com/am0eYJO.gif'></img>
+                  <h1 className="TitleText">Sprig Goals</h1>
             </div>
 
-            <div>
-                <h1>Sprig Goals</h1>
-                <img className="ui large centered circular image" src={logo}></img>
-            </div>
-
-
+           
 
             <div className="ui placeholder segment">
                 <FormSection handleFormSwitch={handleFormSwitch}/>

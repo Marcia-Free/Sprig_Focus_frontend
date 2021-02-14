@@ -28,7 +28,7 @@ class newTaskForm extends React.Component {
 
     onSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/tasks";
+    const url = "http://localhost:3001/tasks";
     const newTask = {...this.state}
     //-----------------------
     const reqObj = {

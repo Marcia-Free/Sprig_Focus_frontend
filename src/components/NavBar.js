@@ -1,46 +1,102 @@
 import React from 'react'
 import logo from '../images/sprig logo.png'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { logoutUser } from '../actions/auth'
 
 class NavBar extends React.Component {
 
-
-
+    handleClick = () => {
+        this.props.logoutUser()
+      }
 
 render() {
+
     return (
+ 
+        
         <div className='NavBar'>
-            <div className="ui mini menu">
 
-                <div className="ui dropdown icon item">
-                    <img className="ui mini circular image" src={logo}/>
-                    <i className="dropdown icon"></i>
-                </div>
+            {
+            this.props.currentUser 
+            ? 
+                <div className="ui mini menu">
 
-
-                <a className="item">Welcome, User</a>
-                <a className="item"><Link to='/goals'>Goals</Link></a>
-                <a className="item"><Link to='/completed'>Completed</Link></a>
-
-
-                <div class="right menu">
-                    <div class="item">
-                        <div class="ui icon input">
-                            <input type="text" placeholder="Search..."/>
-                            <i class="search link icon"></i>
-                        </div>
+                    <div className="ui dropdown icon item">
+                        <img className="ui mini circular image" src={logo}/>
+                        <i className="dropdown icon"></i>
                     </div>
-                        <a class="ui item"><Link to='/'>Sign Out</Link></a>
+
+
+                    <p className=" ui header item">Welcome {this.props.currentUser.username}</p>
+                        <div className="ui buttons">
+                            <Link className="ui button item" to='/goals'>Goals</Link>
+                            <Link className="ui button item" to='/completed'>Completed</Link>
+                        </div>
+
+
+                    <div class="right menu">
+                        {/* <div class="item">
+                            <div class="ui icon input">
+                                <input type="text" placeholder="Search..."/>
+                                <i class="search link icon"></i>
+                            </div>
+                        </div> */}
+
+                        <Link className="ui button item" to='/' onClick={this.handleClick}>Log Out</Link>
+                    </div>
+
                 </div>
 
-            </div>
-            <div className="ui divider">
-            </div>
+            : 
+
+                <div className="ui mini menu">
+
+                    <div className="ui dropdown icon item">
+                        <img className="ui mini circular image" src={logo}/>
+                        <i className="dropdown icon"></i>
+                    </div>
+
+
+                        <p className=" ui header item">Welcome</p>
+                        <div className="ui buttons">
+                            <Link className="ui disabled button item" to='/goals'>Goals</Link>
+                            <Link className="ui disabled button item" to='/completed'>Completed</Link>
+                        </div>
+
+
+                    <div class="right menu">
+                        {/* <div class="item">
+                            <div class="ui icon input">
+                                <input type="text" placeholder="Search..."/>
+                                <i class="search link icon"></i>
+                            </div>
+                        </div> */}
+
+                        <Link className="ui button item" to='/'>Log In</Link>
+
+                    </div>
+                </div>
+
+            }
+
+
+
 
         </div>
     );
   }
 
-
 }
-export default NavBar;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser
+    }
+  }
+  
+  const mapDispatchToProps = {
+    logoutUser: logoutUser
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

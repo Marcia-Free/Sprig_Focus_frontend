@@ -4,6 +4,9 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import VirtualPet from './VirtualPet'
 
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
+
 
 class Complete extends React.Component {
     constructor(props) {
@@ -14,7 +17,11 @@ class Complete extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://localhost:3001/api/v1/goals";
+        if (!this.props.currentUser) {
+            this.props.history.push('/')
+        }
+
+        const url = "http://localhost:3001/goals";
         fetch(url)
           .then(response => {
             if (response.ok) {
@@ -103,4 +110,12 @@ render() {
 
 
 }
-export default Complete;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      goals: state.goals
+    }
+  }
+
+export default connect(mapStateToProps)(Complete);
