@@ -16,17 +16,23 @@ import newTaskForm from './components/newTaskForm'
 import updateForm from './components/updateForm'
 import updateTaskForm from './components/updateTaskForm'
 
+import VirtualPet from './components/VirtualPet'
+import NavBar from './components/NavBar'
 
 
-function App() {
+function App(props) {
 
 
   return (
 
     <BrowserRouter>
       <div className='App'>
+        {console.log(props)}
+        <NavBar/>
+        <VirtualPet props={props}/>
+
           <Switch>
-            <Route exact path ={'/'} component={Home} />
+            <Route path ={'/home' || '/'} component={Home} />
             <Route exact path={'/signup'} component={SignUp} />
             <Route exact path = {'/login'} component={Login} />
             {/* <Route exact path = {'/goals'} component={Goals} /> */}

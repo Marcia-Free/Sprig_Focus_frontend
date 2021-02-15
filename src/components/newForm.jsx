@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
-// import VirtualPet from './VirtualPet'
 
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
@@ -62,7 +59,6 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
                 <h1 className="ui yellow image header">What will you accomplish today?</h1>
 

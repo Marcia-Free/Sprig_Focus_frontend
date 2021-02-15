@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import VirtualPet from './VirtualPet'
 
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
@@ -19,7 +18,7 @@ class Goals extends React.Component {
     componentDidMount() {
 
         if (!this.props.currentUser) {
-            this.props.history.push('/')
+            this.props.history.push('/home')
         }
 
         const urlGoal = "http://localhost:3001/goals";
@@ -96,13 +95,7 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
-                <h1>Focus</h1>
-
-        <VirtualPet />
-
-  
 
             <div className="ui two column centered grid">
                 <div className="Main six wide column">

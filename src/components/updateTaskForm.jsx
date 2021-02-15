@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
 
 
 class updateTaskForm extends React.Component {
@@ -69,7 +67,6 @@ render() {
     return (
         
         <div className='Task'>
-        <NavBar />
 
             <div class="ui items">
                 <h1 className="ui yellow image header">Goal: {this.props.location.state.goal_name}</h1>

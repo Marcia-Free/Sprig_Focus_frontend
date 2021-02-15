@@ -43,7 +43,7 @@ render() {
                             </div>
                         </div> */}
 
-                        <Link className="ui button item" to='/' onClick={this.handleClick}>Log Out</Link>
+                        <Link className="ui button item" to='/home' onClick={this.handleClick}>Log Out</Link>
                     </div>
 
                 </div>
@@ -73,7 +73,7 @@ render() {
                             </div>
                         </div> */}
 
-                        <Link className="ui button item" to='/'>Log In</Link>
+                        <Link className="ui button item" to='/home'>Log In</Link>
 
                     </div>
                 </div>

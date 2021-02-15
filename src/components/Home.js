@@ -4,7 +4,6 @@ import logo from '../images/sprig logo.png'
 
 import FormSection from './LoginFormSection'
 
-import NavBar from './NavBar'
 import SignUp from './SignUp'
 import Login from './Login'
 
@@ -36,7 +35,6 @@ const  Home = (props) => {
     return (
         <div className='Home'>
 
-          <NavBar/>
             
 
             <div className="TitleContainer">

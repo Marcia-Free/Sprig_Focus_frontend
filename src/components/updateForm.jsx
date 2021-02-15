@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
 
 import logo from '../images/sprig logo.png'
 
@@ -99,8 +97,6 @@ render() {
         
         
         <div className='Goals'>
-        <NavBar />
-
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 

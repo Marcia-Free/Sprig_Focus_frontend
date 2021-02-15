@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link , Redirect} from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
-import VirtualPet from './VirtualPet'
 
 import logo from '../images/sprig logo.png'
 import { SetStateAction } from '@babylonjs/core';
@@ -27,7 +24,7 @@ class Goal extends React.Component {
     componentDidMount() {
 
       if (!this.props.currentUser) {
-        this.props.history.push('/')
+        this.props.history.push('/home')
     }
 
       const { match: {params: { id }}} = this.props;
@@ -180,11 +177,7 @@ class Goal extends React.Component {
       return (
           
           <div className='Goals'>
-          <NavBar />
 
-                  <h1>Goal</h1>
-
-          <VirtualPet />
 
               <div className="ui two column centered grid">
 

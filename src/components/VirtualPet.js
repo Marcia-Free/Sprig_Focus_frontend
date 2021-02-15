@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { withRouter } from 'react-router-dom';
+
 import './Theme.css';
 
 import'@babylonjs/loaders/glTF'
@@ -14,9 +16,13 @@ let box;
 
 class VirtualPet extends React.Component {
 
-
     
 render() {
+
+    const { location } = this.props;
+    if (location.pathname.match('/home')){
+      return null;
+    }
 
     return (
         
@@ -79,4 +85,4 @@ render() {
 
 
 }
-export default VirtualPet;
+export default withRouter(VirtualPet);
