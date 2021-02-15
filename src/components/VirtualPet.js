@@ -7,7 +7,7 @@ import './Theme.css';
 import'@babylonjs/loaders/glTF'
 import * as BABYLON from "@babylonjs/core/Legacy/legacy";
 import SceneComponent from './SceneComponent';
-import { FreeCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
+import { ArcRotateCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
 
 let container;
 let box;
@@ -39,20 +39,30 @@ render() {
 
     
         // This creates and positions a free camera (non-mesh)
-        var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
+        var camera = new ArcRotateCamera("camera1", 0, 0, 10, new Vector3(0, 3, 1), scene);
+            camera.setPosition(new BABYLON.Vector3(0, 0, 20));
         // This targets the camera to scene origin
-        camera.setTarget(Vector3.Zero());
+        // camera.setTarget(Vector3.Zero());
+          // camera.useFramingBehavior = true;
+          // The goal distance of camera from target
+          camera.radius = 15;
+          // The goal height of camera above local origin (centre) of target
+          // camera.heightOffset = 5;  
+          // The goal rotation of camera around local origin (centre) of target in x y plane
+          // camera.rotationOffset = 0;
+          // The speed at which acceleration is halted
+          camera.maxCameraSpeed = .5;
+
+
         const canvas = scene.getEngine().getRenderingCanvas();
         // This attaches the camera to the canvas
         camera.attachControl(canvas, true);
+        scene.activeCamera.panningSensibility = 0;
         
         // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
         var light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
         // Default intensity is 1. Let's dim the light a small amount
         light.intensity = 0.7;
-
-        // Our built-in 'ground' shape.
-        MeshBuilder.CreateGround("ground", {width: 25, height: 6}, scene);
 
 
 
@@ -65,13 +75,31 @@ render() {
 
             scene.beforeRender = () => {
                 // sprig.position.y = 0;
-                sprig.rotation.y = .1;
-                sprig.rotationQuaternion = undefined;
+                // sprig.rotation.y = .1;
+                // sprig.rotationQuaternion = undefined;
 
                 }
             // Adds all elements to the scene
             container.addAllToScene();
         });
+
+        
+        BABYLON.SceneLoader.LoadAssetContainer("../models/", "room-nocolor.glb", scene, function (container) {
+          var meshes = container.meshes;
+          var materials = container.materials;
+
+          const room = meshes[0]
+
+          scene.beforeRender = () => {
+            room.scaling = new BABYLON.Vector3(6, 4, 6);
+              room.position.y = -4;
+              // room.rotation.y = 1.57;
+              room.rotationQuaternion = undefined;
+
+              }
+          // Adds all elements to the scene
+          container.addAllToScene();
+      });
   }
 
     //Will run on every frame render.  We are spinning the box on y-axis.
