@@ -28,7 +28,7 @@ class Login extends React.Component {
 
   onSubmit(event) {
   event.preventDefault();
-  const url = "http://localhost:3001//auth";
+  const url = "http://localhost:3001/auth";
   const newUser = {...this.state}
   //-----------------------
   const reqObj = {
@@ -62,9 +62,9 @@ class Login extends React.Component {
 
       <h2 className="ui yellow image header">
         <img src={logo} className="image"/>
-          <div className="content">
+          {/* <div className="content">
           Welcome Back!
-          </div>
+          </div> */}
       </h2>
 
         <div className="ui two column centered grid">
@@ -72,22 +72,22 @@ class Login extends React.Component {
             
             <form className="ui form" onSubmit={this.onSubmit}>
 
-              <div class="field">
-                <div class="ui left icon input">
-                  <i class="user icon"></i>
+              <div className="field">
+                <div className="ui left icon input">
+                  <i className="user icon"></i>
                   <input type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username}/>
                 </div>
               </div>
 
-              <div class="field">
-                <div class="ui left icon input">
-                  <i class="lock icon"></i>
+              <div className="field">
+                <div className="ui left icon input">
+                  <i className="lock icon"></i>
                   <input type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password}/>
                 </div>
               </div>
 
-            <input type='submit' class="ui fluid large yellow submit button" value='login'></input>
-              <div class="ui error message">
+            <input type='submit' className="ui fluid large yellow submit button" value='Login'></input>
+              <div className="ui error message">
               {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
               </div>
             </form>

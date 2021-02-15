@@ -38,7 +38,7 @@ render() {
         const { goals } = this.state;
 
         const completedGoals = goals.filter((goal, index) => (
-            goal.completed === true
+            goal.completed === true && goal.user_id === this.props.currentUser.id
         ));
 
         const allGoals = completedGoals.map((goal, index) => (
