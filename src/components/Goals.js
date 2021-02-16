@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import VirtualPet from './VirtualPet'
+
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
 
 
 class Goals extends React.Component {
@@ -14,7 +16,12 @@ class Goals extends React.Component {
     }
 
     componentDidMount() {
-        const urlGoal = "http://localhost:3001/api/v1/goals";
+
+        if (!this.props.currentUser) {
+            this.props.history.push('/home')
+        }
+
+        const urlGoal = "http://localhost:3001/goals";
         fetch(urlGoal)
           .then(response => {
             if (response.ok) {
@@ -24,7 +31,6 @@ class Goals extends React.Component {
           })
           .then(response => this.setState({ goals: response }))
           .catch(() => this.props.history.push("/"));
-
     }
 
 
@@ -34,7 +40,8 @@ render() {
 
 
         const currentGoals = goals.filter((goal, index) => (
-            goal.completed === false
+            goal.completed === false && goal.user_id === this.props.currentUser.id
+
         ));
 
         const allGoals = currentGoals.map((goal, index) => (
@@ -88,13 +95,7 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
-                <h1>Focus</h1>
-
-        <VirtualPet />
-
-  
 
             <div className="ui two column centered grid">
                 <div className="Main six wide column">
@@ -114,7 +115,15 @@ render() {
         </div>
     );
   }
-
-
 }
-export default Goals;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      goals: state.goals
+    }
+  }
+
+
+
+export default connect(mapStateToProps)(Goals);

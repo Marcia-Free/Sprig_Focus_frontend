@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
 
 
 class newTaskForm extends React.Component {
@@ -28,7 +26,7 @@ class newTaskForm extends React.Component {
 
     onSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/tasks";
+    const url = "http://localhost:3001/tasks";
     const newTask = {...this.state}
     //-----------------------
     const reqObj = {
@@ -56,7 +54,6 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
             <div class="ui items">
                 <h1 className="ui yellow image header">Goal: {this.props.location.state.goal_name}</h1>
@@ -70,7 +67,7 @@ render() {
                         
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" name="name" placeholder="Goal Name" onChange={this.onChange}/>
+                            <input type="text" name="name" placeholder="Task Name" onChange={this.onChange}/>
                         </div>
 
                         <div className="field">

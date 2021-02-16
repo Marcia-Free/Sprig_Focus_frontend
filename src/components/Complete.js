@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import VirtualPet from './VirtualPet'
+
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
 
 
 class Complete extends React.Component {
@@ -14,7 +14,11 @@ class Complete extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://localhost:3001/api/v1/goals";
+        if (!this.props.currentUser) {
+            this.props.history.push('/home')
+        }
+
+        const url = "http://localhost:3001/goals";
         fetch(url)
           .then(response => {
             if (response.ok) {
@@ -31,7 +35,7 @@ render() {
         const { goals } = this.state;
 
         const completedGoals = goals.filter((goal, index) => (
-            goal.completed === true
+            goal.completed === true && goal.user_id === this.props.currentUser.id
         ));
 
         const allGoals = completedGoals.map((goal, index) => (
@@ -81,11 +85,7 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
-                <h1>Completed Goals</h1>
-
-        <VirtualPet />
             <div className="ButtonColumn sixteen wide column">
             </div>
   
@@ -103,4 +103,12 @@ render() {
 
 
 }
-export default Complete;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      goals: state.goals
+    }
+  }
+
+export default connect(mapStateToProps)(Complete);

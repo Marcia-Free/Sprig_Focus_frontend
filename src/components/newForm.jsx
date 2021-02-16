@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
-// import VirtualPet from './VirtualPet'
+
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
 
 import logo from '../images/sprig logo.png'
 
@@ -20,8 +20,6 @@ class newForm extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        // this.stripHtmlEntities = this.stripHtmlEntities.bind(this);
-
     }
 
 
@@ -33,8 +31,8 @@ class newForm extends React.Component {
 
     onSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3001/api/v1/goals";
-    const newGoal = {...this.state}
+    const url = "http://localhost:3001/goals";
+    const newGoal = {...this.state, user_id: this.props.currentUser.id}
     //-----------------------
     const reqObj = {
       method: 'POST',
@@ -61,7 +59,6 @@ render() {
     return (
         
         <div className='Goals'>
-        <NavBar />
 
                 <h1 className="ui yellow image header">What will you accomplish today?</h1>
 
@@ -107,4 +104,12 @@ render() {
 
 
 }
-export default newForm;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      goals: state.goals
+    }
+  }
+
+export default connect(mapStateToProps)(newForm);

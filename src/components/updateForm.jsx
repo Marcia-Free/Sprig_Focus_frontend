@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import NavBar from './NavBar'
-import Footer from './Footer'
 
 import logo from '../images/sprig logo.png'
 
@@ -18,7 +16,7 @@ class updateForm extends React.Component {
     componentDidMount() {
         const { match: {params: { id }}} = this.props;
         
-          const url = `http://localhost:3001/api/v1/goals/${id}`;
+          const url = `http://localhost:3001/goals/${id}`;
   
           fetch(url)
           .then(response => {
@@ -43,7 +41,7 @@ class updateForm extends React.Component {
     event.preventDefault();
 
     const { match: {params: { id }}} = this.props;
-    const url = `http://localhost:3001/api/v1/goals/${id}`;
+    const url = `http://localhost:3001/goals/${id}`;
     const updatedGoal = {...this.state}
     //-----------------------
     const reqObj = {
@@ -85,8 +83,8 @@ render() {
           </div>
 
           <div class="ui small right floated icon buttons">
-            <button class="ui button"><i class="red eraser icon"></i></button>
-            <button class="ui button"><i class="black edit icon"></i></button>
+            {/* <button class="ui button"><i class="red eraser icon"></i></button>
+            <button class="ui button"><i class="black edit icon"></i></button> */}
           </div>
 
       </div>
@@ -99,8 +97,6 @@ render() {
         
         
         <div className='Goals'>
-        <NavBar />
-
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 

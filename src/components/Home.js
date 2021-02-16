@@ -1,44 +1,62 @@
-import React from 'react'
+  import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-import logo from '../images/sprig logo.png'
+import TitleImage from '../images/1837.jpeg'
 
-class Home extends React.Component {
+import FormSection from './LoginFormSection'
 
-render() {
+import SignUp from './SignUp'
+import Login from './Login'
+
+const  Home = (props) => {
+
+    const [user, setUser] = useState({})
+    const [form, setForm] = useState("")
+    
+
+      const handleLogin = (user) => {
+        setUser(user)
+      }
+    
+      const handleFormSwitch = (input) => {
+        setForm(input)
+      }
+
+      const renderForm = () => {
+        switch(form){
+          case "login":
+            return <Login handleLogin={handleLogin}/>
+            break;
+          default:
+            return <SignUp handleLogin={handleLogin}/>
+        }
+      }
+      
+
     return (
         <div className='Home'>
+
             
-            <div class="ui divider">
+
+            <div className="TitleContainer">
+                {/* <img className="ui large centered circular image" src={logo}></img> */}
+                {/* <img className="HomeImage ui centered image" src=' https://i.imgur.com/am0eYJO.gif'></img> */}
+                <img className="HomeImage ui centered image" src={TitleImage}></img>
+
+                  <h1 className="TitleText">Sprig Goals</h1>
             </div>
 
-            <div>
-                <h1>Sprig Goals</h1>
-                <img class="ui big centered circular image" src={logo}></img>
-            </div>
+           
 
-
-
-            <div class="ui placeholder segment">
-                <div class="ui two column stackable center aligned grid">
-                    <div class="ui vertical divider">Or</div>
-
-                    <div class="column">
-                        <i class="huge orange user plus icon"></i>
-                        <Link to='/signup'> <button className="ui yellow large button">New User</button></Link>  
+            <div className="ui placeholder segment">
+                <FormSection handleFormSwitch={handleFormSwitch}/>
+                    <div className="ui segment">
+                        {renderForm()}
                     </div>
-                    <div class="column">
-                        <i class="huge orange users icon"></i>
-                        <Link to='/signin'><button className="ui yellow large button">Existing User</button></Link>
-                    </div>
-
-                </div>
-                
             </div>
 
 
         </div>
     );
-  }
 
 
 }
