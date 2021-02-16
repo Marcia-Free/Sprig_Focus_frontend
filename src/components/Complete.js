@@ -90,9 +90,9 @@ render() {
             </div>
   
 
-            <div className="ui two column centered grid">
-                <div className="Main six wide column">Placeholder</div>
-                <div className="Main eight wide column">
+            <div className="Main ui two column centered grid">
+                <div className="six wide column">Placeholder</div>
+                <div className="ten wide column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
             </div>

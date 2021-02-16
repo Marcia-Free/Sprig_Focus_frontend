@@ -32,7 +32,7 @@ function App(props) {
         <VirtualPet props={props}/>
 
           <Switch>
-            <Route path ={'/home' || '/'} component={Home} />
+            <Route path ={'/home'} component={Home} />
             <Route exact path={'/signup'} component={SignUp} />
             <Route exact path = {'/login'} component={Login} />
             {/* <Route exact path = {'/goals'} component={Goals} /> */}

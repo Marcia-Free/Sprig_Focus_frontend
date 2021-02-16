@@ -6,6 +6,7 @@ import './semantic-ui-css/semantic.min.css';
 import './index.css';
 
 import App from './App';
+import Footer from './components/Footer'
 
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/index'
@@ -21,6 +22,7 @@ ReactDOM.render(
   <Provider store={store}>
     {/* <BrowserRouter> */}
       <App />
+      {/* <Footer/> */}
     {/* </BrowserRouter>, */}
   </Provider>,
   document.getElementById('root')

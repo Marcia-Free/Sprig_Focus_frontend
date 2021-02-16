@@ -97,8 +97,8 @@ render() {
         <div className='Goals'>
 
 
-            <div className="ui two column centered grid">
-                <div className="Main six wide column">
+            <div className="Main ui two column centered grid">
+                <div className="six wide column">
                   
                         <Link to='/new'><button className="ui yellow fluid labeled icon button">
                             <i className="columns icon"></i>
@@ -106,7 +106,7 @@ render() {
                         </button></Link>
 
                 </div>
-                <div className="Main eight wide column">
+                <div className="ten wide column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
             </div>
