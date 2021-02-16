@@ -11,7 +11,7 @@ class MusicPlayer extends React.Component {
       musicList: [{name:'Nice piano and ukulele', author: 'Royalty', img: 'https://www.bensound.com/bensound-img/buddy.jpg', audio:'https://www.bensound.com/bensound-music/bensound-buddy.mp3', duration: '2:02'}, 
         {name:'Gentle acoustic', author: 'Acoustic', img: 'https://www.bensound.com/bensound-img/sunny.jpg', audio:'https://www.bensound.com//bensound-music/bensound-sunny.mp3', duration: '2:20'},
         {name:'Corporate motivational', author: 'Corporate', img: 'https://www.bensound.com/bensound-img/energy.jpg', audio:'https://www.bensound.com/bensound-music/bensound-energy.mp3', duration: '2:59'},
-        {name:'Slow cinematic', author: 'Royalty', img: 'https://www.bensound.com/bensound-img/slowmotion.jpg', audio:'https://www.bensound.com/bensound-music/bensound-slowmotion.mp3', duration: '3:26'}],
+        {name:'Lofi hip hop mix', author: 'ChilledCow', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDjff9jKKU2tqwJ_y9T0je0myvoTlfXk00Pg&usqp=CAU', audio:'https://www.youtube.com/watch?v=5qap5aO4i9A', duration: '3.26'}],
       pause: false,
     };
   
@@ -155,6 +155,7 @@ class MusicPlayer extends React.Component {
       const { musicList, index, currentTime, pause } = this.state;
       const currentSong = musicList[index];
       return (
+    <div className='MusicPlayer'>
         <div className="card">
           <div className="current-song">
             <audio ref={ref => this.playerRef = ref}>
@@ -210,16 +211,13 @@ class MusicPlayer extends React.Component {
                                }
                              </span>
                            </div>
-                          )}
+                        )}
           </div>
         </div>
+    </div>
       )
     }
   }
   
-//   ReactDOM.render(
-//     <CardProfile/>,
-//     document.getElementById('root')
-//   )
 
   export default MusicPlayer;

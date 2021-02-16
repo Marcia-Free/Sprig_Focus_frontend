@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from './NavBar'
-import Footer from './Footer'
-
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
+
+import MusicPlayer from './MusicPlayer'
 
 
 class Goals extends React.Component {
@@ -104,11 +103,14 @@ render() {
                             <i className="columns icon"></i>
                             Create Goal
                         </button></Link>
-
+                        
+                        <MusicPlayer/>
                 </div>
+                
                 <div className="ten wide column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
+                
             </div>
 
 
