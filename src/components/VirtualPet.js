@@ -41,10 +41,25 @@ render() {
         createGround: true,
         groundSize: 500,
         groundColor: BABYLON.Color3.White(),
-        enableGroundShadow: true,
+        enableGroundShadow: false,
         groundYBias: 0.01
       });
 
+      // scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
+      // scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.85);
+      // scene.fogDensity = .05;
+
+      let ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene);
+
+      var myMaterial = new BABYLON.StandardMaterial("myMaterial", scene);
+        myMaterial.diffuseTexture = new BABYLON.Texture("models/images/grass.jpg", scene);
+        myMaterial.diffuseTexture.hasAlpha = true;
+        myMaterial.alpha = 0.8;
+
+        myMaterial.diffuseColor = new BABYLON.Color3(0.6, 0.9, 0.6);
+        ground.material = myMaterial
+
+      
 
 
         //Skybox--------------------------------------------------
@@ -58,7 +73,7 @@ render() {
             skybox.material = skyboxMaterial;
 
         //Camera--------------------------------------------------
-        const camera = new ArcRotateCamera("camera1", -Math.PI / 2, Math.PI / 2, 12, new Vector3(0, 8, -0), scene);
+        const camera = new ArcRotateCamera("camera1", -Math.PI / 2, Math.PI / 2, 12, new Vector3(0, 12, -0), scene);
           scene.activeCamera.lowerRadiusLimit = 7;
           scene.activeCamera.upperRadiusLimit = 5;
           scene.activeCamera.alpha = 4;
@@ -72,7 +87,6 @@ render() {
         const canvas = scene.getEngine().getRenderingCanvas();
         // This attaches the camera to the canvas
         camera.attachControl(canvas, true);
-        scene.animationsEnabled = true;
 
         //Light--------------------------------------------------
         // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
@@ -93,17 +107,21 @@ render() {
             const materials = container.materials;
 
             const sprig = meshes[0]
+            const sprigM = materials[0]
 
             scene.beforeRender = () => {
-                // sprig.position.y = 0;
-                // sprig.rotation.y = .1;
-                // sprig.rotationQuaternion = undefined;
-                sprig.position = new BABYLON.Vector3(0, 0.5, 0);
+                sprig.position = new BABYLON.Vector3(1.5, 6.5, 5);
+                sprig.rotation = new BABYLON.Vector3(0, 2.8, 0);
+
+                sprigM.roughness  = 0.4;
+                // sprigM.diffuseColor = new BABYLON.Color3(0, .3, 0);
+                // sprigM.specular = BABYLON.Color3.Black();
+
 
                 }
             // Adds all elements to the scene
             container.addAllToScene();
-            //camera.setTarget(BABYLON.Vector3.Zero(sprig)); 
+
         });
 
         
@@ -114,18 +132,15 @@ render() {
           const room = meshes[0]
 
 
-          scene.animationGroups.forEach(anim => {
-            console.log(anim)
-          })
-
-          // var animationGroup1 = new BABYLON.AnimationGroup("Group1");
-          // animationGroup1.addTargetedAnimation('Take 001', room);
-          console.log(scene.animationGroups.length)
+          // scene.animationGroups.forEach(anim => {
+          //   console.log(anim)
+          // })
+          // console.log(scene.animationGroups.length)
         
 
           scene.beforeRender = () => {
             room.scaling = new BABYLON.Vector3(-5, 4, 5);
-            room.position = new BABYLON.Vector3(0, -2, 30);
+            room.position = new BABYLON.Vector3(0, 1.8, 30);
             
 
 
