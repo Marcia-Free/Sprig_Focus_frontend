@@ -15,6 +15,10 @@
       background-color: #d0c5cd;
     }
 
+    .ui.button{
+      background-color: rgb(255, 170, 79);
+    }
+
 /*----------HOME---------------------------------------------------------------*/
   .Home {
     text-align: center;
@@ -62,8 +66,9 @@
     width: 85%;
   }
 
-  .GoalCard {
+  .GoalCard.ui {
     color: rgb(31, 31, 31);
+    background-color: rgb(252, 252, 252);
     text-align: left; 
   }
 

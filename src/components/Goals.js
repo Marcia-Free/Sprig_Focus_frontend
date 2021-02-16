@@ -44,7 +44,7 @@ render() {
         ));
 
         const allGoals = currentGoals.map((goal, index) => (
-            <div className='GoalCard grey ui fluid card'>
+            <div className='GoalCard ui fluid card'>
                 {/* key={goal.id} */}
 
                 <div className="content">
@@ -81,10 +81,13 @@ render() {
 
 
         const noGoals = (
-            <div className='GoalCard ui header'>
-            <h4>
-                No goals yet. Why not add a new one?
-            </h4>
+            <div className='GoalCard ui fluid card'>
+                <div className="content">
+                    <h4>
+                        No goals yet. Why not add a new one?
+                    </h4>
+                </div>
+           
             </div>
         )
 
@@ -99,9 +102,9 @@ render() {
             <div className="Main ui two column centered grid">
                 <div className="six wide column">
                   
-                        <Link to='/new'><button className="ui yellow fluid labeled icon button">
-                            <i className="columns icon"></i>
-                            Create Goal
+                        <Link to='/new'><button className="ui fluid button">
+                            <i className="plus icon"></i>
+                            New Goal
                         </button></Link>
                         
                         <MusicPlayer/>

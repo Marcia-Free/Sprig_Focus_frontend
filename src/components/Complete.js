@@ -39,7 +39,7 @@ render() {
         ));
 
         const allGoals = completedGoals.map((goal, index) => (
-            <div className='GoalCard grey ui fluid card'>
+            <div className='GoalCard ui fluid card'>
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
                     <button class="circular ui right floated olive icon button">
@@ -72,10 +72,12 @@ render() {
         ));
 
         const noGoals = (
-            <div className='GoalCard ui header'>
-            <h4>
-                No goals completed yet.
-            </h4>
+            <div className='GoalCard ui fluid card'>
+                <div className="content">
+                    <h4>
+                        No goals completed yet.
+                    </h4>
+                </div>
             </div>
         )
 
