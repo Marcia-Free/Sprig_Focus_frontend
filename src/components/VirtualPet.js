@@ -7,7 +7,7 @@ import './Theme.css';
 import'@babylonjs/loaders/glTF'
 import * as BABYLON from "@babylonjs/core/Legacy/legacy";
 import SceneComponent from './SceneComponent';
-import { ArcRotateCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
+import { UniversalCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
 
 let container;
 let box;
@@ -35,36 +35,43 @@ render() {
 
     onSceneReady = scene => {
 
-           // Default Environment
+      // Default Environment
+      var environment =  scene.createDefaultEnvironment({ 
+        createSkybox: false,
+        createGround: true,
+        groundSize: 200,
+        groundColor: BABYLON.Color3.White(),
+        enableGroundShadow: true, 
+        groundYBias: 1 
+});
 
-    
+          //Skybox--------------------------------------------------
+          var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:1000.0}, scene);
+          var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+          skyboxMaterial.backFaceCulling = false;
+          skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("models/images/TropicalSunnyDay", scene);
+          skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+          skyboxMaterial.diffuseColor = new BABYLON.Color3(0, .3, 0);
+          skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+          skybox.material = skyboxMaterial;
+
         // This creates and positions a free camera (non-mesh)
-        var camera = new ArcRotateCamera("camera1", 0, 0, 10, new Vector3(0, 3, 1), scene);
-            camera.setPosition(new BABYLON.Vector3(0, 0, 20));
-        // This targets the camera to scene origin
-        // camera.setTarget(Vector3.Zero());
-          // camera.useFramingBehavior = true;
-          // The goal distance of camera from target
-          camera.radius = 15;
-          // The goal height of camera above local origin (centre) of target
-          // camera.heightOffset = 5;  
-          // The goal rotation of camera around local origin (centre) of target in x y plane
-          // camera.rotationOffset = 0;
-          // The speed at which acceleration is halted
-          camera.maxCameraSpeed = .5;
-
-
+        const camera = new UniversalCamera("camera1", new Vector3(0, 8, -20), scene);
+        
         const canvas = scene.getEngine().getRenderingCanvas();
         // This attaches the camera to the canvas
         camera.attachControl(canvas, true);
-        scene.activeCamera.panningSensibility = 0;
-        
+
+        //Light--------------------------------------------------
         // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-        var light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+        const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+        
         // Default intensity is 1. Let's dim the light a small amount
-        light.intensity = 0.7;
+        light.intensity = 1;
+        
 
 
+        
 
 
         BABYLON.SceneLoader.LoadAssetContainer("../models/", "sprig-wave.glb", scene, function (container) {
@@ -77,24 +84,29 @@ render() {
                 // sprig.position.y = 0;
                 // sprig.rotation.y = .1;
                 // sprig.rotationQuaternion = undefined;
+                sprig.position = new BABYLON.Vector3(0, 0.5, 0);
 
                 }
             // Adds all elements to the scene
             container.addAllToScene();
+            //camera.setTarget(BABYLON.Vector3.Zero(sprig)); 
         });
 
         
-        BABYLON.SceneLoader.LoadAssetContainer("../models/", "room-nocolor.glb", scene, function (container) {
+        BABYLON.SceneLoader.LoadAssetContainer("../models/", "focus_room.glb", scene, function (container) {
           var meshes = container.meshes;
           var materials = container.materials;
 
           const room = meshes[0]
 
+
           scene.beforeRender = () => {
-            room.scaling = new BABYLON.Vector3(6, 4, 6);
-              room.position.y = -4;
+            room.scaling = new BABYLON.Vector3(-5, 4, 5);
+            room.position = new BABYLON.Vector3(0, -2, 30);
+
               // room.rotation.y = 1.57;
-              room.rotationQuaternion = undefined;
+              // room.rotationQuaternion = undefined;
+              //room.rotation = new BABYLON.Vector3(0, 3.14, 0);
 
               }
           // Adds all elements to the scene

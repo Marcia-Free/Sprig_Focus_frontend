@@ -1,6 +1,6 @@
   import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-import logo from '../images/sprig logo.png'
+import TitleImage from '../images/1837.jpeg'
 
 import FormSection from './LoginFormSection'
 
@@ -39,7 +39,9 @@ const  Home = (props) => {
 
             <div className="TitleContainer">
                 {/* <img className="ui large centered circular image" src={logo}></img> */}
-                <img className="HomeImage ui centered image" src=' https://i.imgur.com/am0eYJO.gif'></img>
+                {/* <img className="HomeImage ui centered image" src=' https://i.imgur.com/am0eYJO.gif'></img> */}
+                <img className="HomeImage ui centered image" src={TitleImage}></img>
+
                   <h1 className="TitleText">Sprig Goals</h1>
             </div>
 
