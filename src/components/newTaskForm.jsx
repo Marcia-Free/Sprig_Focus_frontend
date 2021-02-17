@@ -55,8 +55,9 @@ render() {
         
         <div className='Goals'>
 
+        <div className= 'ui Main fluid Form card'>
             <div class="ui items">
-                <h1 className="ui yellow image header">Goal: {this.props.location.state.goal_name}</h1>
+                <h1 className="ui black header">New Task for {this.props.location.state.goal_name}</h1>
             </div> 
 
 
@@ -66,24 +67,28 @@ render() {
                     <form className="ui form" onSubmit={this.onSubmit} >
                         
                         <div className="field">
-                            <label>Name</label>
+                            <label className='ui grey header'>Name</label>
                             <input type="text" name="name" placeholder="Task Name" onChange={this.onChange}/>
                         </div>
 
                         <div className="field">
-                            <label>Extra Info</label>
+                            <label className='ui grey header'>Extra Info</label>
                             <textarea rows="3" name="description" placeholder="Description" onChange={this.onChange}/>
                         </div>
 
-
+                        <div class="two ui buttons">
                         <button className="ui fluid large yellow submit button" type="submit">Add Task</button>
+                        <Link className="ui fluid red submit button" to={`/goals/${this.state.goal_id}`}>Go Back</Link>
+                        </div>
+
+
                         <div class="ui error message"></div>
                         
                     </form>
                 </div>
             </div>
 
-            
+            </div>
         </div>
     );
   }

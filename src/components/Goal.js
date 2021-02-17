@@ -49,7 +49,6 @@ class Goal extends React.Component {
       const tasklistlength = this.state.goal.tasks.length
 
       if(prevState.numoftasks !== tasklistlength) {
-        console.log(prevState.numoftasks, tasklistlength)
 
         this.setState({
           numoftasks: tasklistlength

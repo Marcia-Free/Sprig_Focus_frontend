@@ -100,7 +100,7 @@ render() {
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 
-                <div className="ui centered grid">
+                <div className="Main ui centered grid">
 
                     <div className="ten wide column">
                         <div className="ui segments">
@@ -109,7 +109,7 @@ render() {
                                 <div className="ui segment">
                                     <h3 class="ui header">
                                         <div className="field">
-                                            <label>Name</label>
+                                            <label >Name</label>
                                             <input type="text" name="name" value={this.state.goal.name} onChange={this.onChange}/>
                                         </div>
                                     </h3>
@@ -118,14 +118,14 @@ render() {
                                 <div className='ui horizontal segments'>
                                     <div className='ui segment'>
                                         <div className="field">
-                                            <i class="calendar outline icon"></i><label>Date </label>
+                                            <i class="calendar outline icon"></i><label className='ui grey header'>Date </label>
                                             <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
                                         </div>
                                     </div>
 
                                     <div className='ui segment'>
                                         <div className="field">
-                                            <i class="clock outline icon"></i><label>Time </label>
+                                            <i class="clock outline icon"></i><label className='ui grey header'>Time </label>
                                             <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
                                         </div>
                                     </div>
