@@ -1,92 +1,91 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux'
 
 import ReactPlayer from 'react-player'
+import { currentUser } from '../actions/auth'
 import './MusicPlayer.css';
 
 class MusicPlayer extends React.Component {
-
-    state = {
-      index: 1,
-      currentTime: '0:00',
-      musicList: [{name:'Nice piano and ukulele', audio:'https://www.bensound.com/bensound-music/bensound-buddy.mp3'}, 
-        {name:'Gentle acoustic', audio:'https://www.bensound.com//bensound-music/bensound-sunny.mp3'},
-        {name:'Corporate motivational', audio:'https://www.bensound.com/bensound-music/bensound-energy.mp3'},
-        {name:'Lofi hip hop mix', audio:'https://www.youtube.com/watch?v=5qap5aO4i9A'}],
+    constructor(props) {
+        super(props);
+    this.state = {
+      index: 0,
+      musicList: [],
+      urlList: [],
       pause: false,
     };
+}
   
   
-//    componentDidMount() {
-//      this.playerRef.addEventListener("timeupdate", this.timeUpdate, false);
-//      this.playerRef.addEventListener("ended", this.nextSong, false);
-//      this.timelineRef.addEventListener("click", this.changeCurrentTime, false);
-//      this.timelineRef.addEventListener("mousemove", this.hoverTimeLine, false);
-//      this.timelineRef.addEventListener("mouseout", this.resetTimeLine, false);
-//    }
+   componentDidMount() {
+    const urlSongs = "http://localhost:3001/songs";
+    fetch(urlSongs)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => this.setState({ musicList: response }))
+   }
   
-//     componentWillUnmount() {
-//       this.playerRef.removeEventListener("timeupdate", this.timeUpdate);
-//       this.playerRef.removeEventListener("ended", this.nextSong);
-//       this.timelineRef.removeEventListener("click", this.changeCurrentTime);
-//       this.timelineRef.removeEventListener("mousemove", this.hoverTimeLine);
-//       this.timelineRef.removeEventListener("mouseout", this.resetTimeLine);
-//     }
-  
-    updatePlayer = () =>{
-      const { musicList, index } = this.state;
-      const currentSong = musicList[index];
-      const audio = new Audio(currentSong.audio);
-      this.playerRef.load();
-    }
-    
-    clickAudio = (key) =>{
-      const { pause } = this.state;
+
+    // clickAudio = (id) =>{
+    //   const { pause } = this.state;  
+    //   const userSongs = this.state.musicList.filter((song, index) => (
+    //     song.user_id === this.props.currentUser.id))
+
+    //   const  urls = userSongs.map((song, index) => (
+    //     song.url
+    // ))
       
-      this.setState({
-        index: key
-      });
-      
-      this.updatePlayer();
-      if(pause){
-        this.playerRef.play();
-      }
-    }
+    //   this.setState({
+    //     index: id,
+    //     currentSong: this.state.musicList[id],
+    //     urlList: urls
+    //   });  
+
+    // }
   
     
     render() {
-      const { musicList, index, currentTime, pause } = this.state;
-      const currentSong = musicList[index];
-      return (
+      const { musicList, index, pause} = this.state;
 
+      const userSongs = musicList.filter((song, index) => (
+        song.user_id === this.props.currentUser.id))
+
+
+      return (
 
     <div className='MusicPlayer'>
 
         <div className="card">
           <div className="current-song">
-            <ReactPlayer
-            className="img-wrap" 
-            url='https://www.youtube.com/watch?v=5qap5aO4i9A'
-            controls
-            playbackRate = {2}
-            width = "270px"
-            height = "200px"
-            />
-            <span className="song-name">{ currentSong.name }</span>
+          <ReactPlayer 
+          className="img-wrap"
+          url='https://youtu.be/5qap5aO4i9A'
+          playbackRate = {2}
+          width = "270px"
+          height = "200px"
+          controls />
+
+            <span className="song-name">lofi hip hop radio</span>
         </div>
           
           
           
           <div className="play-list" >
-            {musicList.map( (music, key=0) =>
-                           <div key={key} 
-                                onClick={()=>this.clickAudio(key)}
+            {userSongs.map( (song, key) =>
+                           <div key={song.id} 
+                                // onClick={()=>this.clickAudio(song.id)}
                                 className={"track " + 
                                 (index === key && !pause ?'current-audio':'') + 
-                                (index === key && pause ?'play-now':'')} >
+                                (index === key && pause ?'play-now':'')} 
+                                >
                                 
                                 <div className="track-discr" >
-                                <span className="track-name" >{music.name}</span>
+                                <span className="track-name" >{song.song_name}</span>
                                 </div>
                            </div>
                         )}
@@ -96,6 +95,13 @@ class MusicPlayer extends React.Component {
       )
     }
   }
+
+  const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser
+    }
+  }
+
   
 
-  export default MusicPlayer;
+export default connect(mapStateToProps)(MusicPlayer);

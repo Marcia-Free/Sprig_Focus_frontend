@@ -60,9 +60,10 @@ render() {
         
         <div className='Goals'>
 
-                <h1 className="ui yellow image header">What will you accomplish today?</h1>
+                
 
-
+        <div className= 'ui fluid Form card'>
+        <h1 className="ui yellow image header">What will you accomplish today?</h1>
             <div className="ui two column centered grid">
                 <div className="twelve wide column">
 
@@ -90,14 +91,14 @@ render() {
                             </div>
                         </div>
 
-                        <button className="ui fluid large yellow submit button" type="submit">Add Goal</button>
+                        <button className="ui fluid large submit button" type="submit">Add Goal</button>
                         <div class="ui error message"></div>
                         
                     </form>
                 </div>
             </div>
-
-            
+          
+        </div>
         </div>
     );
   }

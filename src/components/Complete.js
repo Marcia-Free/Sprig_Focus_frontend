@@ -88,13 +88,11 @@ render() {
         
         <div className='Goals'>
 
-            <div className="ButtonColumn sixteen wide column">
-            </div>
   
 
             <div className="Main ui two column centered grid">
-                <div className="six wide column">Placeholder</div>
-                <div className="ten wide column">
+ 
+                <div className="sixteen wide column">
                     {goals.length > 0 ? allGoals : noGoals}
                 </div>
             </div>

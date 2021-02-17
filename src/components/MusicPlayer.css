@@ -6,7 +6,8 @@
      justify-content: center;
      align-items: center;
      flex-direction: column;
-     background: #000;
+     background: #071739;
+     border-radius: 20px;
    }
    
    .MusicPlayer h1 {
@@ -24,10 +25,10 @@
         /* padding: 0 5px; */
         margin-top: 40px;
         border-radius: 20px;
-        color: #fff;
+        color: rgb(224, 224, 224);
         font-weight: 100;
         box-shadow: 0px 0px 70px 0px #274684;
-        background: #071739;
+        /* background: #071739; */
         overflow: hidden;
     }
 
@@ -36,7 +37,7 @@
      flex-direction: column;
      align-items: center;
      padding: 20px 0px;
-     /* border-radius: 20px; */
+     border-radius: 20px;
      color: #071739;
      background: #fff;
    }

@@ -32,6 +32,10 @@ class Goals extends React.Component {
           .catch(() => this.props.history.push("/"));
     }
 
+    // componentWillUnmount() {
+
+    // }
+
 
 
 render() {
