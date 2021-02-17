@@ -78,14 +78,6 @@ class SignUp extends React.Component {
 
     <div className='SignUp'>
 
-      <h2 className="ui yellow image header">
-        <img src={logo} className="image"/>
-          <div className="content">
-          Create a new Account
-          </div>
-      </h2>
-
-        <div className="ui two column centered grid">
           <div className="twelve wide column">
             
             <form className="ui form" onSubmit={this.onSubmit}>
@@ -112,7 +104,7 @@ class SignUp extends React.Component {
                 </div>
               </div>
 
-              <input type='submit' className="ui fluid large yellow submit button" value='Create Account'></input>
+              <input type='submit' className="ui fluid large submit button" value='Create Account'></input>
               <div className="ui error message">
               {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
               </div>
@@ -120,8 +112,6 @@ class SignUp extends React.Component {
 
           </div>
         </div> 
-    </div>
-
     );
     }
 }

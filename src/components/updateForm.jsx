@@ -96,17 +96,17 @@ render() {
 
         
         
-        <div className='Goals'>
+        <div className='Goal'>
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 
                 <div className="ui centered grid">
 
-                    <div className=" Main ten wide column">
+                    <div className="ten wide column">
                         <div className="ui segments">
                             <a className="ui small image"> <img src={logo}/> </a>
 
-                                <div className="ui olive segment">
+                                <div className="ui segment">
                                     <h3 class="ui header">
                                         <div className="field">
                                             <label>Name</label>
@@ -116,14 +116,14 @@ render() {
                                 </div>
 
                                 <div className='ui horizontal segments'>
-                                    <div className='ui olive segment'>
+                                    <div className='ui segment'>
                                         <div className="field">
                                             <i class="calendar outline icon"></i><label>Date </label>
                                             <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
                                         </div>
                                     </div>
 
-                                    <div className='ui olive segment'>
+                                    <div className='ui segment'>
                                         <div className="field">
                                             <i class="clock outline icon"></i><label>Time </label>
                                             <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
@@ -131,23 +131,21 @@ render() {
                                     </div>
                                 </div>
 
-                                <div className='ui secondary olive segment'>
+                                <div className='ui secondary segment'>
                                     <div className="ui header">Info</div>
                                         <div className="field">
                                             <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
 
                                     <div class="two ui buttons">
-                                        <button className="ui fluid large yellow submit button" type="submit">Update Goal</button>
-                                        <Link to={`/goals/${this.state.goal.id}`}>
-                                            <button className="ui fluid large red submit button">Go Back
-                                            </button></Link>
+                                        <button className="ui fluid submit button" type="submit">Update Goal</button>
+                                        <Link className="ui fluid red submit button" to={`/goals/${this.state.goal.id}`}>Go Back</Link>
                                     </div>
 
                                     <div class="ui error message"></div>
                                 
                                     <div className="ui divider"></div>
-                                    <a className="header"> <h3>Tasks</h3> </a>
+                                    <div className="header"> <h3>Tasks</h3> </div>
 
                                     <div className= 'ui middle aligned divided list'>
                                     {goal.tasks.length > 0 ? allTasks : taskList}

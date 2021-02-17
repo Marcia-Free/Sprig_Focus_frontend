@@ -7,6 +7,8 @@ import { SetStateAction } from '@babylonjs/core';
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
 
+import MusicPlayer from './MusicPlayer'
+
 class Goal extends React.Component {
   
   
@@ -127,8 +129,8 @@ class Goal extends React.Component {
           </div>
 
           <div class="ui small right floated icon buttons">
-            <button class="ui button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i></button>
-            <Link to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><button class="ui button"><i class="black edit icon"></i></button></Link>
+            <button class="ui basic button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i></button>
+            <Link class="ui basic button" to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><i class="black edit icon"></i></Link>
           </div>
 
       </div>
@@ -176,28 +178,27 @@ class Goal extends React.Component {
     
       return (
           
-          <div className='Goals'>
+          <div className='Goal'>
 
 
-              <div className="ui two column centered grid">
+              <div className="Main ui two column centered grid">
 
-                  <div className="Main six wide column">
+                  <div className="six wide column">
                     <div className="two ui buttons">
-                        <Link to={`/goals/${goal.id}/edit`}><button className="ui yellow left attached button" >
-                            Update Goal
-                        </button></Link>
+                        <Link className="ui fluid button" to={`/goals/${goal.id}/edit`}>Update Goal</Link>
 
-                        <button className="ui yellow right attached button"  onClick={this.handleDelete}>
+                        <button className="ui fluid button"  onClick={this.handleDelete}>
                             Delete Goal
                         </button>
                     </div>
+                    <MusicPlayer/>
                   </div>
 
-                  <div className="Main eight wide column">
+                  <div className="ten wide column">
                       <div className="ui segments">
                               <a className="ui small image"> <img src={logo}/> </a>
 
-                              <div className="ui olive segment">
+                              <div className="ui segment">
                                   <h2 class="ui header">
                                       {goal.completed === true ? goalDone : goalNotDone}
                                       <div class="content"> {goal.name} </div>
@@ -205,22 +206,22 @@ class Goal extends React.Component {
                               </div>
 
                               <div className='ui horizontal segments'>
-                                <span class="ui olive segment">
+                                <span class="ui segment">
                                   <i class="calendar outline icon"></i>
                                   {goal.date}
                                 </span>
 
-                                <span class="ui olive segment">
+                                <span class="ui segment">
                                   <i class="clock outline icon"></i>
                                   {goal.time}
                                 </span>   
                               </div>
 
-                                  <div className='ui olive secondary segment'>
+                                  <div className='ui secondary segment'>
                                   <div className="ui header">Info</div>
                                   <div className="description"> <p>{goal.info}</p> </div>
                               
-                                  <a className="header"> <h3>Tasks</h3></a>
+                                  <div className="ui grey header"> <h3>Tasks</h3></div>
                                   <div className="ui divider"></div>
                                   
                                     <Link to={{pathname: '/tasks/new', state: {goal_name: goal.name, goal_id: goalID}}}><button className="ui yellow basic fluid labeled icon button">

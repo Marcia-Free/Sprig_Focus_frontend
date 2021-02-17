@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import TitleImage from '../images/1837.jpeg'
+import { Button, Divider, Image, Transition } from 'semantic-ui-react'
 
 import FormSection from './LoginFormSection'
 
@@ -49,7 +50,7 @@ const  Home = (props) => {
 
             <div className="ui placeholder segment">
                 <FormSection handleFormSwitch={handleFormSwitch}/>
-                    <div className="ui segment">
+                    <div className="Home ui segment">
                         {renderForm()}
                     </div>
             </div>

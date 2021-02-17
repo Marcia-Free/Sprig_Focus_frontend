@@ -39,7 +39,7 @@ render() {
         ));
 
         const allGoals = completedGoals.map((goal, index) => (
-            <div className='GoalCard ui fluid card'>
+            <div className='GoalCardC ui fluid card'>
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
                     <button class="circular ui right floated olive icon button">
