@@ -65,7 +65,7 @@ class MusicPlayer extends React.Component {
           <ReactPlayer 
           className="img-wrap"
           url='https://youtu.be/ownHh9QIsRk'
-          playbackRate = {2}
+          playbackRate = {1}
           width = "270px"
           height = "200px"
           controls />

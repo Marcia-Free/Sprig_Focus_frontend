@@ -70,6 +70,7 @@ render() {
 
         const allGoals = completedGoals.map((goal, index) => (
             <div className='GoalCardC ui fluid card'>
+                {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
                     <button class="circular ui right floated olive icon button">

@@ -141,9 +141,39 @@ class Goal extends React.Component {
 
     }
 
+    // markTaskComplete(task) {
+    //   const { match: {params: { id }}} = this.props;
+    //   const url = `http://localhost:3001/tasks/${task.id}`;
+    //   const updatedTask = {completed: !task.completed}
+    //    //-----------------------
+    //   const reqObj = {
+    //     method: 'PATCH',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body:  JSON.stringify(updatedTask)
+
+    //   }
+    // //------------------------------
+    // fetch(url, reqObj)
+    //     .then(response => {
+    //     if (response.ok) {
+    //         return response.json();
+    //     }
+    //     throw new Error("Network response was not ok.");
+    //     })
+    //     .catch(error => console.log(error.message));
+    // }
+    
+
     grabTasks() {
       const { goal } = this.state;
       const tasklistlength = goal.tasks.length
+
+      const currentTasks = goal.tasks.filter((task, index) => (
+        task.completed === false
+      ))
+
 
       return goal.tasks.map((task, index) => (
 
@@ -153,12 +183,17 @@ class Goal extends React.Component {
 
           <div className="content">
             <div className="header">{task.name}</div>
+
+
             <div className="description">{task.description}</div>
           </div>
 
+
           <div class="ui small right floated icon buttons">
-            <button class="ui basic button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i></button>
-            <Link class="ui basic button" to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><i class="black edit icon"></i></Link>
+            <button class="ui basic button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i> Delete</button>
+            <Link class="ui basic button" to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><i class="black edit icon"></i> Edit</Link>
+            <button class="ui basic button" onClick={() => this.markTaskComplete(task)}><i class="grey x icon"></i> Mark complete</button>
+
           </div>
 
       </div>
@@ -200,8 +235,7 @@ class Goal extends React.Component {
           )
           const goalNotDone = (
             <i className="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
-          )
-          
+          )          
           
     
       return (
@@ -223,13 +257,13 @@ class Goal extends React.Component {
                   </div>
 
                   <div className="ten wide column">
-                      <div className="ui segments">
-                              <a className="ui small image">  </a>
+                  <div className='GoalCard ui fluid card'>
+                  {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
 
                               <div className="ui segment">
                                   <h2 class="ui header">
                                       {goal.completed === true ? goalDone : goalNotDone}
-                                      <div class="content"> {goal.name} </div>
+                                      <div className="content"> {goal.name} </div>
                                   </h2>
                               </div>
 

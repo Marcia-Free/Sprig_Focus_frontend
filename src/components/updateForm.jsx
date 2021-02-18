@@ -103,8 +103,8 @@ render() {
                 <div className="Main ui centered grid">
 
                     <div className="ten wide column">
-                        <div className="ui segments">
-                            <a className="ui small image"> <img src={logo}/> </a>
+                    <div className='GoalCard ui fluid card'>
+                    {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
 
                                 <div className="ui segment">
                                     <h3 class="ui header">
@@ -136,6 +136,11 @@ render() {
                                         <div className="field">
                                             <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
+
+                                    <div className="field">
+                                        <label className='ui grey header'>Image</label>
+                                        <input type="text" name="imageurl" value={this.state.goal.imageurl} onChange={this.onChange}/>
+                                    </div>
 
                                     <div class="two ui buttons">
                                         <button className="ui fluid submit button" type="submit">Update Goal</button>

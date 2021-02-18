@@ -15,7 +15,7 @@ class newForm extends React.Component {
             completed: false,
             user_id: 0,
             tag_id: 0,
-            // avatar: ''
+            imageurl: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -59,16 +59,16 @@ render() {
 
 
         <div className= 'ui Main fluid Form card'>
-        <h1 className="ui black header">What will you accomplish today?</h1>
+        <h1 className="FormT ui header">What will you accomplish today?</h1>
             <div className="ui two column centered grid">
                 <div className="twelve wide column">
 
                     <form className="ui form" onSubmit={this.onSubmit} >
-{/* 
+
                         <div className="field">
                             <label className='ui grey header'>Image</label>
-                            <input type="file" name="avatar" onChange={this.onChange}/>
-                        </div> */}
+                            <input type="text" name="imageurl" onChange={this.onChange}/>
+                        </div>
                         
                         <div className="field">
                             <label className='ui grey header'>Name</label>

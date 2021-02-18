@@ -70,7 +70,7 @@ render() {
 
         <div className= 'ui Main fluid Form card'>
             <div class="ui items">
-                <h1 className="ui black header">Update task for {this.props.location.state.goal_name}</h1>
+                <h1 className="FormT ui header">Update task for {this.props.location.state.goal_name}</h1>
             </div> 
 
 
