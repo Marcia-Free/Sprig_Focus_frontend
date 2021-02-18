@@ -102,7 +102,7 @@ render() {
         // scene.animationGroups[0].start(true);
 
 
-        BABYLON.SceneLoader.LoadAssetContainer("../models/", "sprig-wave.glb", scene, function (container) {
+        BABYLON.SceneLoader.LoadAssetContainer("../models/", "sprig-listen.glb", scene, function (container) {
             const meshes = container.meshes;
             const materials = container.materials;
 
