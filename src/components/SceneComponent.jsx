@@ -19,10 +19,10 @@ export default (props) => {
             
             const engine = new Engine(reactCanvas.current, antialias, engineOptions, adaptToDeviceRatio);
             const scene = new Scene(engine, sceneOptions);
-            engine.displayLoadingUI();
+            // engine.displayLoadingUI();
 
             if (scene.isReady()) {
-                setTimeout(function() {engine.hideLoadingUI()}, 1000);
+                // setTimeout(function() {engine.hideLoadingUI()}, 1000);
                 props.onSceneReady(scene)
                 
             } else {
