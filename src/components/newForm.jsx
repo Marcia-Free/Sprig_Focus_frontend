@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
-
 import logo from '../images/sprig logo.png'
 
 class newForm extends React.Component {
@@ -16,12 +14,12 @@ class newForm extends React.Component {
             time: "",
             completed: false,
             user_id: 0,
-            tag_id: 0
+            tag_id: 0,
+            // avatar: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
 
     onChange = (event) => {
         this.setState({ 
@@ -54,7 +52,6 @@ class newForm extends React.Component {
     }
 
 
-
 render() {      
     return (
         
@@ -67,6 +64,11 @@ render() {
                 <div className="twelve wide column">
 
                     <form className="ui form" onSubmit={this.onSubmit} >
+{/* 
+                        <div className="field">
+                            <label className='ui grey header'>Image</label>
+                            <input type="file" name="avatar" onChange={this.onChange}/>
+                        </div> */}
                         
                         <div className="field">
                             <label className='ui grey header'>Name</label>

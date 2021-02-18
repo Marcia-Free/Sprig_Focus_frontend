@@ -56,6 +56,35 @@ class Goal extends React.Component {
       }
     }
 
+    formatTime(time) {
+      const convertTime = String(time)
+      const timeSlice = convertTime.slice(11,-1)
+      let hours = timeSlice.slice(0,2)
+      let minutes = timeSlice.slice(3,5)
+      let ending = 'AM'
+
+          if (hours > 12) {
+              hours -= 12
+              ending = 'PM'
+          }
+      let formattedTime = `${hours}:${minutes} ${ending}`
+
+          if(time === null) {
+               return ' '
+          }
+
+          return formattedTime
+
+  }
+
+  formatDate(date) {
+      const splitDate = date ? date.split('-') : '000'
+      const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
+      const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
+
+      return correctDate
+  }
+
     handleDelete() {
       const { match: {params: { id }}} = this.props;
       const { goal } = this.state;
@@ -195,7 +224,7 @@ class Goal extends React.Component {
 
                   <div className="ten wide column">
                       <div className="ui segments">
-                              <a className="ui small image"> <img src={logo}/> </a>
+                              <a className="ui small image">  </a>
 
                               <div className="ui segment">
                                   <h2 class="ui header">
@@ -207,12 +236,12 @@ class Goal extends React.Component {
                               <div className='ui horizontal segments'>
                                 <span class="ui segment">
                                   <i class="calendar outline icon"></i>
-                                  {goal.date}
+                                  {this.formatDate(goal.date)}
                                 </span>
 
                                 <span class="ui segment">
                                   <i class="clock outline icon"></i>
-                                  {goal.time}
+                                  {this.formatTime(goal.time)}
                                 </span>   
                               </div>
 

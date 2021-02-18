@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
+import placeholder from '../images/placeholder.png'
 
 import MusicPlayer from './MusicPlayer'
 
@@ -36,6 +37,35 @@ class Goals extends React.Component {
 
     // }
 
+    formatTime(time) {
+        const convertTime = String(time)
+        const timeSlice = convertTime.slice(11,-1)
+        let hours = timeSlice.slice(0,2)
+        let minutes = timeSlice.slice(3,5)
+        let ending = 'AM'
+
+            if (hours > 12) {
+                hours -= 12
+                ending = 'PM'
+            }
+        let formattedTime = `${hours}:${minutes} ${ending}`
+
+            if(time === null) {
+                 return ' '
+            }
+
+            return formattedTime
+
+    }
+
+    formatDate(date) {
+        const splitDate = date ? date.split('-') : '000'
+        const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
+        const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
+
+        return correctDate
+    }
+
 
 
 render() {
@@ -50,6 +80,7 @@ render() {
         const allGoals = currentGoals.map((goal, index) => (
             <div className='GoalCard ui fluid card'>
                 {/* key={goal.id} */}
+                <img class="ui fluid image" src={placeholder}></img>
 
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
@@ -66,11 +97,11 @@ render() {
                 <div class="extra content">
                     <span class="left floated like">
                     <i class="calendar outline icon"></i>
-                    {goal.date}
+                    {this.formatDate(goal.date)}
                     </span>
                     <span class="right floated star">
                     <i class="clock outline icon"></i>
-                    {goal.time}
+                    {this.formatTime(goal.time)}
                     </span>   
                 </div>
                 <Link to={`/goals/${goal.id}`}><div class="ui bottom attached button">
@@ -81,6 +112,9 @@ render() {
 
             </div>
         ));
+
+
+
 
 
 

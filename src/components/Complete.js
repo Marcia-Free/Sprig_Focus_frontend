@@ -30,6 +30,36 @@ class Complete extends React.Component {
           .catch(() => this.props.history.push("/"));
     }
 
+    formatTime(time) {
+        const convertTime = String(time)
+        const timeSlice = convertTime.slice(11,-1)
+        let hours = timeSlice.slice(0,2)
+        let minutes = timeSlice.slice(3,5)
+        let ending = 'AM'
+
+            if (hours > 12) {
+                hours -= 12
+                ending = 'PM'
+            }
+        let formattedTime = `${hours}:${minutes} ${ending}`
+
+            if(time === null) {
+                 return ' '
+            }
+
+            return formattedTime
+
+    }
+
+    formatDate(date) {
+        const splitDate = date ? date.split('-') : '000'
+        const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
+        const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
+
+        return correctDate
+    }
+
+
 
 render() {
         const { goals } = this.state;
@@ -55,11 +85,11 @@ render() {
                 <div class="extra content">
                     <span class="left floated like">
                     <i class="calendar outline icon"></i>
-                    {goal.date}
+                    {this.formatDate(goal.date)}                    
                     </span>
                     <span class="right floated star">
                     <i class="clock outline icon"></i>
-                    {goal.time}
+                    {this.formatTime(goal.time)}
                     </span>   
                 </div>
                 <Link to={`/goals/${goal.id}`}><div class="ui bottom attached button">

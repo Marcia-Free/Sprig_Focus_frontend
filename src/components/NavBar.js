@@ -1,5 +1,6 @@
 import React from 'react'
-import logo from '../images/sprig logo.png'
+import placeholderAvatar from '../images/sprig logo.png'
+import avatar from '../images/girl.png'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../actions/auth'
@@ -23,7 +24,9 @@ render() {
                 <div className="ui mini menu">
 
                     <div className="ui dropdown icon item">
-                        <img className="ui mini circular image" src={logo}/>
+                        {/* <img className="ui mini circular image" src={this.props.currentUser.avatar}/> */}
+                        <img className="ui mini circular image" src={avatar}/>
+
                         <i className="dropdown icon"></i>
                     </div>
 
@@ -52,9 +55,9 @@ render() {
 
                 <div className="ui mini menu">
 
-                    <div className="ui dropdown icon item">
-                        <img className="ui mini circular image" src={logo}/>
-                        <i className="dropdown icon"></i>
+                    <div className="ui icon item">
+                        <img className="ui mini circular image" src={placeholderAvatar}/>
+                        {/* <i className="dropdown icon"></i> */}
                     </div>
 
 
