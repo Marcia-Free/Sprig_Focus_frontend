@@ -20,6 +20,7 @@ Coming Soon
 * BabylonJS
 * Javascript frontend
 * React and Redux
+* JWT Tokens
 * SemanticUI with HTML/CSS
 * Rails backend here (https://github.com/Marcia-Free/Sprig_Focus_backend)
 * PostgreSQL database
