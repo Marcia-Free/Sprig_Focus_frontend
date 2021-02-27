@@ -4,9 +4,7 @@ A cute gamified Task Manager built with Javascript and BabylonJS.
 
 
 ## Link to Demo Video
-
-video link below
-Coming Soon
+https://youtu.be/CcOCqLTyt8E
 
 
 ## Application Features
