@@ -4,7 +4,9 @@ A cute gamified Task Manager built with Javascript and BabylonJS.
 
 
 ## Link to Demo Video
-https://youtu.be/CcOCqLTyt8E
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=CcOCqLTyt8E
+" target="_blank"><img src="http://img.youtube.com/vi/CcOCqLTyt8E/0.jpg" 
+alt="Sprig Focus App" width="240" height="180" border="10" /></a>
 
 
 ## Application Features
@@ -40,6 +42,3 @@ COMING SOON
 ## Authors
 * **Marcia Freeman**
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=CcOCqLTyt8E
-" target="_blank"><img src="http://img.youtube.com/vi/CcOCqLTyt8E/0.jpg" 
-alt="Sprig Focus App" width="240" height="180" border="10" /></a>
