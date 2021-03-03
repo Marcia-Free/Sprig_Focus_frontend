@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
-
 import logo from '../images/sprig logo.png'
 
 class newForm extends React.Component {
@@ -16,12 +14,12 @@ class newForm extends React.Component {
             time: "",
             completed: false,
             user_id: 0,
-            tag_id: 0
+            tag_id: 0,
+            imageurl: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
 
     onChange = (event) => {
         this.setState({ 
@@ -54,7 +52,6 @@ class newForm extends React.Component {
     }
 
 
-
 render() {      
     return (
         
@@ -62,30 +59,35 @@ render() {
 
 
         <div className= 'ui Main fluid Form card'>
-        <h1 className="ui grey header">What will you accomplish today?</h1>
+        <h1 className="FormT ui header">What will you accomplish today?</h1>
             <div className="ui two column centered grid">
                 <div className="twelve wide column">
 
                     <form className="ui form" onSubmit={this.onSubmit} >
+
+                        <div className="field">
+                            <label className='ui grey header'>Image</label>
+                            <input type="text" name="imageurl" onChange={this.onChange}/>
+                        </div>
                         
                         <div className="field">
-                            <label>Name</label>
+                            <label className='ui grey header'>Name</label>
                             <input type="text" name="name" placeholder="Goal Name" onChange={this.onChange}/>
                         </div>
 
                         <div className="field">
-                            <label>Info</label>
+                            <label className='ui grey header'>Info</label>
                             <textarea rows="3" name="info" placeholder="Description" onChange={this.onChange}/>
                         </div>
 
                         <div className="fields">
                             <div className="field">
-                            <label>Date</label>
+                            <label className='ui grey header'>Date</label>
                             <input type="date" name="date" onChange={this.onChange}/>
                             </div>
                             
                             <div className="field">
-                            <label>Time</label>
+                            <label className='ui grey header'>Time</label>
                             <input type="time" name="time" onChange={this.onChange}/>
                             </div>
                         </div>

@@ -4,7 +4,8 @@ const currentUser = (state=null, action) => {
       case 'LOGIN_SUCCESS': 
         return {
           id: action.user.id,
-          username: action.user.username
+          username: action.user.username,
+          avatar: action.user.avatar
         }
       case 'LOGOUT_USER': 
         return null

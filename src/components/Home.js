@@ -43,7 +43,7 @@ const  Home = (props) => {
                 {/* <img className="HomeImage ui centered image" src=' https://i.imgur.com/am0eYJO.gif'></img> */}
                 <img className="HomeImage ui centered image" src={TitleImage}></img>
 
-                  <h1 className="TitleText">Sprig Goals</h1>
+                  <h1 className="TitleText">Sprig Focus</h1>
             </div>
 
            

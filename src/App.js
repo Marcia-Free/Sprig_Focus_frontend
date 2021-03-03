@@ -19,15 +19,10 @@ import updateTaskForm from './components/updateTaskForm'
 import VirtualPet from './components/VirtualPet'
 import NavBar from './components/NavBar'
 
-
 function App(props) {
-
-
   return (
-
     <BrowserRouter>
       <div className='App'>
-        {console.log(props)}
         <NavBar/>
         <VirtualPet props={props}/>
 
@@ -35,7 +30,6 @@ function App(props) {
             <Route path ={'/home'} component={Home} />
             <Route exact path={'/signup'} component={SignUp} />
             <Route exact path = {'/login'} component={Login} />
-            {/* <Route exact path = {'/goals'} component={Goals} /> */}
             <Route exact path = {'/goals'} component={Goals} />
             <Route exact path = {'/completed'} component={Complete} />
 
@@ -43,7 +37,6 @@ function App(props) {
             <Route exact path = {'/new'} component={newForm} />
             <Route exact path = {'/goals/:id/edit'} component={updateForm} />
 
-            {/* <Route exact path = {'/tasks/:id'} component={Task} /> */}
             <Route exact path = {'/tasks/new'} component={newTaskForm} />
             <Route exact path = {'/tasks/:id/edit'} component={updateTaskForm} />
           </Switch>
@@ -51,5 +44,4 @@ function App(props) {
     </BrowserRouter>
   );
 }
-
 export default App;

@@ -100,16 +100,16 @@ render() {
 
             <form className="ui form" onSubmit={this.onSubmit} >
                 
-                <div className="ui centered grid">
+                <div className="Main ui centered grid">
 
                     <div className="ten wide column">
-                        <div className="ui segments">
-                            <a className="ui small image"> <img src={logo}/> </a>
+                    <div className='GoalCard ui fluid card'>
+                    {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
 
                                 <div className="ui segment">
                                     <h3 class="ui header">
                                         <div className="field">
-                                            <label>Name</label>
+                                            <label >Name</label>
                                             <input type="text" name="name" value={this.state.goal.name} onChange={this.onChange}/>
                                         </div>
                                     </h3>
@@ -118,14 +118,14 @@ render() {
                                 <div className='ui horizontal segments'>
                                     <div className='ui segment'>
                                         <div className="field">
-                                            <i class="calendar outline icon"></i><label>Date </label>
+                                            <i class="calendar outline icon"></i><label className='ui grey header'>Date </label>
                                             <input type="date" name="date" value={this.state.goal.date} onChange={this.onChange}/>
                                         </div>
                                     </div>
 
                                     <div className='ui segment'>
                                         <div className="field">
-                                            <i class="clock outline icon"></i><label>Time </label>
+                                            <i class="clock outline icon"></i><label className='ui grey header'>Time </label>
                                             <input type="time" name="time" value={this.state.goal.time} onChange={this.onChange}/>
                                         </div>
                                     </div>
@@ -136,6 +136,11 @@ render() {
                                         <div className="field">
                                             <textarea rows="4" name="info" value={this.state.goal.info} onChange={this.onChange}/>
                                         </div>
+
+                                    <div className="field">
+                                        <label className='ui grey header'>Image</label>
+                                        <input type="text" name="imageurl" value={this.state.goal.imageurl} onChange={this.onChange}/>
+                                    </div>
 
                                     <div class="two ui buttons">
                                         <button className="ui fluid submit button" type="submit">Update Goal</button>

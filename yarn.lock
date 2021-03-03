@@ -2172,6 +2172,13 @@
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
   "version" "6.4.2"
 
+"activestorage@^5.2.4-5":
+  "integrity" "sha512-eQg0flKkANT8FjJzSgNFBx21t+yXXQL5bJREf6yenq18tOOdBvBhLnnSTG1ek4V3HXVqzAxVkuWpGEwGmDBr7g=="
+  "resolved" "https://registry.npmjs.org/activestorage/-/activestorage-5.2.4-5.tgz"
+  "version" "5.2.4-5"
+  dependencies:
+    "spark-md5" "^3.0.0"
+
 "address@^1.0.1", "address@1.1.2":
   "integrity" "sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA=="
   "resolved" "https://registry.npmjs.org/address/-/address-1.1.2.tgz"
@@ -10426,6 +10433,11 @@
   "integrity" "sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA=="
   "resolved" "https://registry.npmjs.org/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz"
   "version" "1.4.8"
+
+"spark-md5@^3.0.0":
+  "integrity" "sha512-0tF3AGSD1ppQeuffsLDIOWlKUd3lS92tFxcsrh5Pe3ZphhnoK+oXIBTzOAThZCiuINZLvpiLH/1VS1/ANEJVig=="
+  "resolved" "https://registry.npmjs.org/spark-md5/-/spark-md5-3.0.1.tgz"
+  "version" "3.0.1"
 
 "spdx-correct@^3.0.0":
   "integrity" "sha512-cOYcUWwhCuHCXi49RhFRCyJEK3iPj1Ziz9DpViV3tbZOwXD49QzIN3MpOLJNxh2qwq2lJJZaKMVw9qNi4jTC0w=="

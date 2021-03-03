@@ -49,13 +49,41 @@ class Goal extends React.Component {
       const tasklistlength = this.state.goal.tasks.length
 
       if(prevState.numoftasks !== tasklistlength) {
-        console.log(prevState.numoftasks, tasklistlength)
 
         this.setState({
           numoftasks: tasklistlength
         })
       }
     }
+
+    formatTime(time) {
+      const convertTime = String(time)
+      const timeSlice = convertTime.slice(11,-1)
+      let hours = timeSlice.slice(0,2)
+      let minutes = timeSlice.slice(3,5)
+      let ending = 'AM'
+
+          if (hours > 12) {
+              hours -= 12
+              ending = 'PM'
+          }
+      let formattedTime = `${hours}:${minutes} ${ending}`
+
+          if(time === null) {
+               return ' '
+          }
+
+          return formattedTime
+
+  }
+
+  formatDate(date) {
+      const splitDate = date ? date.split('-') : '000'
+      const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
+      const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
+
+      return correctDate
+  }
 
     handleDelete() {
       const { match: {params: { id }}} = this.props;
@@ -113,9 +141,39 @@ class Goal extends React.Component {
 
     }
 
+    // markTaskComplete(task) {
+    //   const { match: {params: { id }}} = this.props;
+    //   const url = `http://localhost:3001/tasks/${task.id}`;
+    //   const updatedTask = {completed: !task.completed}
+    //    //-----------------------
+    //   const reqObj = {
+    //     method: 'PATCH',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body:  JSON.stringify(updatedTask)
+
+    //   }
+    // //------------------------------
+    // fetch(url, reqObj)
+    //     .then(response => {
+    //     if (response.ok) {
+    //         return response.json();
+    //     }
+    //     throw new Error("Network response was not ok.");
+    //     })
+    //     .catch(error => console.log(error.message));
+    // }
+    
+
     grabTasks() {
       const { goal } = this.state;
       const tasklistlength = goal.tasks.length
+
+      const currentTasks = goal.tasks.filter((task, index) => (
+        task.completed === false
+      ))
+
 
       return goal.tasks.map((task, index) => (
 
@@ -125,12 +183,17 @@ class Goal extends React.Component {
 
           <div className="content">
             <div className="header">{task.name}</div>
+
+
             <div className="description">{task.description}</div>
           </div>
 
+
           <div class="ui small right floated icon buttons">
-            <button class="ui basic button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i></button>
-            <Link class="ui basic button" to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><i class="black edit icon"></i></Link>
+            <button class="ui basic button" onClick={() => this.taskDelete(task)}><i class="red eraser icon"></i> Delete</button>
+            <Link class="ui basic button" to={{pathname: `/tasks/${task.id}/edit`, state: {goal_name: goal.name}}}><i class="black edit icon"></i> Edit</Link>
+            <button class="ui basic button" onClick={() => this.markTaskComplete(task)}><i class="grey x icon"></i> Mark complete</button>
+
           </div>
 
       </div>
@@ -172,8 +235,7 @@ class Goal extends React.Component {
           )
           const goalNotDone = (
             <i className="ui circular red right floated button" onClick={this.markComplete}>Not Complete</i>
-          )
-          
+          )          
           
     
       return (
@@ -195,25 +257,25 @@ class Goal extends React.Component {
                   </div>
 
                   <div className="ten wide column">
-                      <div className="ui segments">
-                              <a className="ui small image"> <img src={logo}/> </a>
+                  <div className='GoalCard ui fluid card'>
+                  {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
 
                               <div className="ui segment">
                                   <h2 class="ui header">
                                       {goal.completed === true ? goalDone : goalNotDone}
-                                      <div class="content"> {goal.name} </div>
+                                      <div className="content"> {goal.name} </div>
                                   </h2>
                               </div>
 
                               <div className='ui horizontal segments'>
                                 <span class="ui segment">
                                   <i class="calendar outline icon"></i>
-                                  {goal.date}
+                                  {this.formatDate(goal.date)}
                                 </span>
 
                                 <span class="ui segment">
                                   <i class="clock outline icon"></i>
-                                  {goal.time}
+                                  {this.formatTime(goal.time)}
                                 </span>   
                               </div>
 
