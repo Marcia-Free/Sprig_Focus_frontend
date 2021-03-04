@@ -29,6 +29,7 @@ alt="Sprig Focus App" width="240" height="180" border="10" /></a>
 ### Install Instructions
 1. Run ```bundle install```
 2. ```npm start```
+3. go to http://localhost:3000/home for main menu
 4. Enjoy!
 
 
