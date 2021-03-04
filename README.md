@@ -22,7 +22,7 @@ alt="Sprig Focus App" width="240" height="180" border="10" /></a>
 * React and Redux
 * JWT Tokens
 * SemanticUI with HTML/CSS
-* Rails backend here (https://github.com/Marcia-Free/Sprig_Focus_backend)
+* Rails backend [here](https://github.com/Marcia-Free/Sprig_Focus_backend)
 * PostgreSQL database
 
 
