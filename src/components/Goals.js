@@ -78,8 +78,8 @@ render() {
         ));
 
         const allGoals = currentGoals.map((goal, index) => (
-            <div className='GoalCard ui fluid card'>
-                {/* key={goal.id} */}
+            <div className='GoalCard ui fluid card' key={goal.id}>
+                
                 {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
 
                 <div className="content">

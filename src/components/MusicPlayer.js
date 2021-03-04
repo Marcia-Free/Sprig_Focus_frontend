@@ -62,13 +62,13 @@ class MusicPlayer extends React.Component {
 
         <div className="card">
           <div className="current-song">
-          <ReactPlayer 
+          {/* <ReactPlayer 
           className="img-wrap"
           url='https://youtu.be/ownHh9QIsRk'
           playbackRate = {1}
           width = "270px"
           height = "200px"
-          controls />
+          controls /> */}
 
             <span className="song-name">Chillhop Yearmix</span>
         </div>

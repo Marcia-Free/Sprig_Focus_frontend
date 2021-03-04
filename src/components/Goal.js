@@ -177,7 +177,7 @@ class Goal extends React.Component {
 
       return goal.tasks.map((task, index) => (
 
-        <div className='Task item'>
+        <div className='Task item'  key={task .id}>
 
         <i className="right triangle icon"></i>
 
