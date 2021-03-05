@@ -8,33 +8,29 @@ import MusicPlayer from './MusicPlayer'
 
 
 class Goals extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          goals: []
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //       goals: []
+    //     };
+    // }
 
-    componentDidMount() {
+    // componentDidMount() {
 
-        if (!this.props.currentUser) {
-            this.props.history.push('/home')
-        }
+    //     if (!this.props.currentUser) {
+    //         this.props.history.push('/home')
+    //     }
 
-        const urlGoal = "http://localhost:3001/goals";
-        fetch(urlGoal)
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error("Network response was not ok.");
-          })
-          .then(response => this.setState({ goals: response }))
-          .catch(() => this.props.history.push("/"));
-    }
-
-    // componentWillUnmount() {
-
+    //     const urlGoal = "http://localhost:3001/goals";
+    //     fetch(urlGoal)
+    //       .then(response => {
+    //         if (response.ok) {
+    //           return response.json();
+    //         }
+    //         throw new Error("Network response was not ok.");
+    //       })
+    //       .then(response => this.setState({ goals: response }))
+    //       .catch(() => this.props.history.push("/"));
     // }
 
     formatTime(time) {
@@ -69,11 +65,14 @@ class Goals extends React.Component {
 
 
 render() {
-        const { goals } = this.state;
+        // const { goals } = this.state;
+        console.log(this.state)
 
 
         const currentGoals = goals.filter((goal, index) => (
-            goal.completed === false && goal.user_id === this.props.currentUser.id
+            // goal.completed === false && goal.user_id === this.props.currentUser.id
+            goal.completed === false
+
 
         ));
 
@@ -145,11 +144,11 @@ render() {
                             New Goal
                         </button></Link>
                         
-                        <MusicPlayer/>
+                        {/* <MusicPlayer/> */}
                 </div>
                 
                 <div className="ten wide column">
-                    {goals.length > 0 ? allGoals : noGoals}
+                    {/* {goals.length > 0 ? allGoals : noGoals} */}
                 </div>
                 
             </div>
@@ -163,7 +162,8 @@ render() {
 const mapStateToProps = (state) => {
     return {
       currentUser: state.currentUser,
-      goals: state.goals
+      goals: state.goals,
+      tasks: state.tasks
     }
   }
 

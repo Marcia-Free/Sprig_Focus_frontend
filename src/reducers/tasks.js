@@ -1,10 +1,10 @@
-const goals = (state=[], action) => {
+const tasks = (state=[], action) => {
     
     switch(action.type){
       case 'LOGIN_SUCCESS': 
       case 'CURRENT_USER': 
-        if (action.user.goals) {
-          return action.user.goals
+        if (action.user.tasks) {
+            return action.user.tasks
         }
         return state
       default: 
@@ -12,4 +12,4 @@ const goals = (state=[], action) => {
     }
   }
   
-  export default goals
+  export default tasks
