@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
 
@@ -59,24 +58,33 @@ class Complete extends React.Component {
         return correctDate
     }
 
+    populateTasks(goalID) {
+        const  { tasks } = this.props
 
+        return tasks.filter((task, index) => (
+            task.goal_id === goalID
+        ));
+    }
 
-render() {
-        const { goals } = this.state;
+    populateGoals() {
+        const  { goals } = this.props
+
 
         const completedGoals = goals.filter((goal, index) => (
             goal.completed === true && goal.user_id === this.props.currentUser.id
         ));
 
-        const allGoals = completedGoals.map((goal, index) => (
-            <div className='GoalCardC ui fluid card'  key={goal.id}>
+        return completedGoals.map((goal, index) => (
+            <div className='GoalCard ui fluid card' key={goal.id}>
+                
                 {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
+
                 <div className="content">
                     {/* <i class="right floated like icon">{goal.tag_id}</i> */}
-                    <button class="circular ui right floated olive icon button">
+                    {/* <button class="circular ui right floated olive icon button">
                         <i class="check icon"></i>
-                    </button>
-                    <div className="header">{goal.name} <i class="small right floated list icon"> {goal.tasks.length}</i></div>
+                    </button> */}
+                    <div className="header">{goal.name} {this.populateTasks(goal.id) != 0 ? <i class="small right floated list icon"> {this.populateTasks(goal.id).length } </i> : null } </div>
                 </div>
 
                 <div className="black description">
@@ -86,7 +94,7 @@ render() {
                 <div class="extra content">
                     <span class="left floated like">
                     <i class="calendar outline icon"></i>
-                    {this.formatDate(goal.date)}                    
+                    {this.formatDate(goal.date)}
                     </span>
                     <span class="right floated star">
                     <i class="clock outline icon"></i>
@@ -101,6 +109,14 @@ render() {
 
             </div>
         ));
+
+    }
+
+
+
+render() {
+        const  { goals } = this.props
+
 
         const noGoals = (
             <div className='GoalCard ui fluid card'>
@@ -119,12 +135,10 @@ render() {
         
         <div className='Goals'>
 
-  
-
             <div className="Main ui two column centered grid">
  
                 <div className="sixteen wide column">
-                    {goals.length > 0 ? allGoals : noGoals}
+                    {goals.length > 0 ? this.populateGoals() : noGoals}
                 </div>
             </div>
 
@@ -138,7 +152,8 @@ render() {
 const mapStateToProps = (state) => {
     return {
       currentUser: state.currentUser,
-      goals: state.goals
+      goals: state.goals,
+      tasks: state.tasks
     }
   }
 

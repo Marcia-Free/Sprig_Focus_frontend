@@ -2,36 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/auth'
-import placeholder from '../images/placeholder.png'
 
 import MusicPlayer from './MusicPlayer'
 
 
 class Goals extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //       goals: []
-    //     };
-    // }
-
-    // componentDidMount() {
-
-    //     if (!this.props.currentUser) {
-    //         this.props.history.push('/home')
-    //     }
-
-    //     const urlGoal = "http://localhost:3001/goals";
-    //     fetch(urlGoal)
-    //       .then(response => {
-    //         if (response.ok) {
-    //           return response.json();
-    //         }
-    //         throw new Error("Network response was not ok.");
-    //       })
-    //       .then(response => this.setState({ goals: response }))
-    //       .catch(() => this.props.history.push("/"));
-    // }
 
     formatTime(time) {
         const convertTime = String(time)
@@ -62,21 +37,22 @@ class Goals extends React.Component {
         return correctDate
     }
 
+    populateTasks(goalID) {
+        const  { tasks } = this.props
 
+        return tasks.filter((task, index) => (
+            task.goal_id === goalID
+        ));
+    }
 
-render() {
-        // const { goals } = this.state;
-        console.log(this.state)
-
+    populateGoals() {
+        const  { goals } = this.props
 
         const currentGoals = goals.filter((goal, index) => (
-            // goal.completed === false && goal.user_id === this.props.currentUser.id
-            goal.completed === false
-
-
+            goal.completed === false && goal.user_id === this.props.currentUser.id
         ));
 
-        const allGoals = currentGoals.map((goal, index) => (
+        return currentGoals.map((goal, index) => (
             <div className='GoalCard ui fluid card' key={goal.id}>
                 
                 {goal.imageurl ? <img className="GoalImage ui image" src={goal.imageurl}></img> : null }
@@ -86,7 +62,8 @@ render() {
                     {/* <button class="circular ui right floated olive icon button">
                         <i class="check icon"></i>
                     </button> */}
-                    <div className="header">{goal.name} <i class="small right floated list icon"> {goal.tasks.length}</i> </div>
+                    <div className="header">{goal.name} {this.populateTasks(goal.id) != 0 ? <i class="small right floated list icon"> {this.populateTasks(goal.id).length} </i> : null } </div>
+
                 </div>
 
                 <div className="black description">
@@ -112,9 +89,11 @@ render() {
             </div>
         ));
 
+    }
 
 
-
+render() {
+        const  { goals } = this.props
 
 
         const noGoals = (
@@ -129,8 +108,6 @@ render() {
         )
 
 
-    
-
     return (
         
         <div className='Goals'>
@@ -144,11 +121,11 @@ render() {
                             New Goal
                         </button></Link>
                         
-                        {/* <MusicPlayer/> */}
+                        <MusicPlayer/>
                 </div>
                 
                 <div className="ten wide column">
-                    {/* {goals.length > 0 ? allGoals : noGoals} */}
+                    {goals.length > 0 ? this.populateGoals() : noGoals}
                 </div>
                 
             </div>

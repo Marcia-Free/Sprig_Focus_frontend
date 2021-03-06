@@ -1,60 +1,16 @@
 import React from 'react'
 import { Link , Redirect} from "react-router-dom";
+import { connect } from 'react-redux'
+import { currentUser } from '../actions/auth'
 
 import logo from '../images/sprig logo.png'
 import { SetStateAction } from '@babylonjs/core';
 
-import { connect } from 'react-redux'
-import { currentUser } from '../actions/auth'
+
 
 import MusicPlayer from './MusicPlayer'
 
 class Goal extends React.Component {
-  
-  
-
-    constructor(props) {
-        super(props);
-        this.state = { 
-          goal: { tasks: [] },
-          numoftasks: 0 };
-
-          this.handleDelete = this.handleDelete.bind(this);
-          this.markComplete = this.markComplete.bind(this);
-    }
-
-    componentDidMount() {
-
-      if (!this.props.currentUser) {
-        this.props.history.push('/home')
-    }
-
-      const { match: {params: { id }}} = this.props;
-      
-        const url = `http://localhost:3001/goals/${id}`;
-
-        fetch(url)
-        .then(response => {
-            if (response.ok) {
-            return response.json();
-            }
-            throw new Error("Network response was not ok.");
-        })
-        .then(response => this.setState({ goal: response }))
-        .catch(() => this.props.history.push("/goals"));
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-      
-      const tasklistlength = this.state.goal.tasks.length
-
-      if(prevState.numoftasks !== tasklistlength) {
-
-        this.setState({
-          numoftasks: tasklistlength
-        })
-      }
-    }
 
     formatTime(time) {
       const convertTime = String(time)
@@ -75,15 +31,15 @@ class Goal extends React.Component {
 
           return formattedTime
 
-  }
+    }
 
-  formatDate(date) {
-      const splitDate = date ? date.split('-') : '000'
-      const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
-      const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
+    formatDate(date) {
+        const splitDate = date ? date.split('-') : '000'
+        const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`
+        const correctDate = formattedDate === '0-0-0' ? '' : formattedDate
 
-      return correctDate
-  }
+        return correctDate
+    }
 
     handleDelete() {
       const { match: {params: { id }}} = this.props;
@@ -164,20 +120,30 @@ class Goal extends React.Component {
     //     })
     //     .catch(error => console.log(error.message));
     // }
+
+    grabGoal() {
+      const { goals } = this.props;
+
+      return goals.filter((goal, index) => (
+        goal.id === parseInt(this.props.match.params.id)
+      ))
+    }
     
+    grabTasks(goalID) {
+      const { tasks } = this.props;
 
-    grabTasks() {
-      const { goal } = this.state;
-      const tasklistlength = goal.tasks.length
+      const currentGoal = this.grabGoal()
+      const goal = currentGoal[0]
 
-      const currentTasks = goal.tasks.filter((task, index) => (
-        task.completed === false
+      const currentTasks = tasks.filter((task, index) => (
+        task.completed === false && task.goal_id === goalID
       ))
 
+      const tasklistlength = currentTasks.length
 
-      return goal.tasks.map((task, index) => (
+      return currentTasks.map((task, index) => (
 
-        <div className='Task item'  key={task .id}>
+        <div className='Task item'  key={task.id}>
 
         <i className="right triangle icon"></i>
 
@@ -224,9 +190,8 @@ class Goal extends React.Component {
 
   render() {
 
-          const { goal } = this.state;
-          const goalTasks = goal.tasks
-          const goalID = goal.id
+          const currentGoal = this.grabGoal()
+          const goal = currentGoal ? currentGoal[0] : null          
 
           let taskList = "No tasks created yet";
 
@@ -241,7 +206,6 @@ class Goal extends React.Component {
       return (
           
           <div className='Goal'>
-
 
               <div className="Main ui two column centered grid">
 
@@ -286,14 +250,14 @@ class Goal extends React.Component {
                                   <div className="ui grey header"> <h3>Tasks</h3></div>
                                   <div className="ui divider"></div>
                                   
-                                    <Link to={{pathname: '/tasks/new', state: {goal_name: goal.name, goal_id: goalID}}}><button className="ui yellow basic fluid labeled icon button">
+                                    <Link to={{pathname: '/tasks/new', state: {goal_name: goal.name, goal_id: goal.id}}}><button className="ui yellow basic fluid labeled icon button">
                                           <i className="plus icon"></i>
                                           New Task
                                     </button></Link> 
 
                                   <div className= 'ui middle aligned divided list'>
 
-                                  {goalTasks.length > 0 ? this.grabTasks() : taskList}
+                                  {this.grabTasks(goal.id).length > 0 ? this.grabTasks(goal.id) : taskList}
                                   </div>
                               </div> 
                       </div>
@@ -310,7 +274,8 @@ class Goal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
-    goals: state.goals
+    goals: state.goals,
+    tasks: state.tasks
   }
 }
 export default connect(mapStateToProps)(Goal);
